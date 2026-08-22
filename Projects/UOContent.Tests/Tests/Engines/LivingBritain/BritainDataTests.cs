@@ -4,11 +4,13 @@ using System.IO;
 using System.Linq;
 using Server;
 using Server.Engines.LivingBritain;
+using Server.Engines.WorldSimulation;
 using Server.Items;
 using Xunit;
 
 namespace UOContent.Tests.Tests.Engines.LivingBritain;
 
+[Collection("Sequential UOContent Tests")]
 public class BritainDataTests
 {
     private static string FindDataRoot()
@@ -257,5 +259,96 @@ public class BritainDataTests
         var definition = new BritainStaticOverride { Id = "test", FunctionType = functionType, ItemId = itemId };
 
         Assert.Equal(expected, LivingBritainStaticSemantics.Classify(definition));
+    }
+
+    [Fact]
+    public void StudioMaterialObjectUsesSimulationSemanticsAndPreservesRuntimeState()
+    {
+        var definition = new BritainStaticOverride
+        {
+            Id = "studio_oak_log",
+            Name = "Eichenstamm",
+            ItemId = 0x1BDD,
+            Simulation = new BritainWorldSimulationDefinition
+            {
+                Enabled = true,
+                Material = "OakWood",
+                State = new BritainWorldSimulationState { Moisture = 0.05, FuelRemaining = 1.0 },
+                Capabilities = new BritainWorldSimulationCapabilities { IgnitePower = 0.8, HeatPower = 0.7 },
+                Visuals = new BritainWorldSimulationVisuals { DefaultItemId = 0x1BDD, BurningItemId = 0xDE3, CharredItemId = 0xDE9, AshItemId = 0xDEA }
+            }
+        };
+
+        var item = Assert.IsType<LivingBritainWorldSimulationItem>(LivingBritainStaticSemantics.Create(definition));
+        try
+        {
+            Assert.Equal(LivingBritainStaticKind.WorldSimulation, LivingBritainStaticSemantics.Classify(definition));
+            Assert.Equal(MaterialId.OakWood, item.PrimaryMaterial);
+            Assert.Equal(0.8, item.Capabilities.IgnitePower);
+            Assert.Equal(0.05, item.State.Moisture);
+            Assert.Equal(0xDE3, item.BurningItemID);
+
+            item.State.Moisture = 0.65;
+            item.OnSimulationStateChanged();
+            item.Apply(definition);
+            Assert.Equal(0.65, item.State.Moisture);
+
+            item.Apply(definition with
+            {
+                Simulation = definition.Simulation with { State = definition.Simulation.State with { Moisture = 0.2 } }
+            });
+            Assert.Equal(0.2, item.State.Moisture);
+        }
+        finally
+        {
+            item.Delete();
+        }
+    }
+
+    [Fact]
+    public void StudioMaterialObjectSerializationPreservesDefinitionAndDynamicState()
+    {
+        var definition = new BritainStaticOverride
+        {
+            Id = "studio_fire_bowl",
+            Name = "Feuerschale",
+            ItemId = 0x19AA,
+            Simulation = new BritainWorldSimulationDefinition
+            {
+                Enabled = true,
+                Material = "Iron",
+                State = new BritainWorldSimulationState { Temperature = 450, FuelRemaining = 0.8, CombustionIntensity = 0.7 },
+                Capabilities = new BritainWorldSimulationCapabilities { HeatPower = 0.9, IgnitePower = 0.8, LightPower = 1.0 },
+                Visuals = new BritainWorldSimulationVisuals { DefaultItemId = 0x19AA, BurningItemId = 0x19AB, CharredItemId = 0x19AA, AshItemId = 0x19AA }
+            }
+        };
+        var original = new LivingBritainWorldSimulationItem(definition);
+        var loaded = new LivingBritainWorldSimulationItem();
+        var path = Path.Combine(Path.GetTempPath(), $"living-britain-simulation-{Guid.NewGuid():N}.bin");
+
+        try
+        {
+            original.State.Soot = 0.42;
+            original.OnSimulationStateChanged();
+            var writer = new BufferWriter(true);
+            original.Serialize(writer);
+            File.WriteAllBytes(path, writer.Buffer.AsSpan(0, (int)writer.Position).ToArray());
+
+            using var reader = new BinaryFileReader(path);
+            loaded.Deserialize(reader);
+
+            Assert.Equal("studio_fire_bowl", loaded.OverrideId);
+            Assert.Equal(MaterialId.Iron, loaded.PrimaryMaterial);
+            Assert.Equal(0.8, loaded.Capabilities.IgnitePower);
+            Assert.Equal(0x19AB, loaded.BurningItemID);
+            Assert.Equal(0.42, loaded.State.Soot);
+            Assert.Equal(0.7, loaded.State.CombustionIntensity);
+        }
+        finally
+        {
+            original.Delete();
+            loaded.Delete();
+            File.Delete(path);
+        }
     }
 }

@@ -304,7 +304,62 @@ public sealed record BritainStaticOverride
     public string DoorRole { get; init; }
     public string FunctionType { get; init; }
     public bool Locked { get; init; }
+    public bool Movable { get; init; }
+    public BritainWorldSimulationDefinition Simulation { get; init; }
     public Point3D ToPoint3D() => new(X, Y, Z);
+}
+
+public sealed record BritainWorldSimulationDefinition
+{
+    public bool Enabled { get; init; }
+    public string Material { get; init; }
+    public BritainWorldSimulationState State { get; init; } = new();
+    public BritainWorldSimulationCapabilities Capabilities { get; init; } = new();
+    public BritainWorldSimulationVisuals Visuals { get; init; } = new();
+}
+
+public sealed record BritainWorldSimulationState
+{
+    public double Condition { get; init; } = 1.0;
+    public double Temperature { get; init; } = 20.0;
+    public double Moisture { get; init; }
+    public double Sharpness { get; init; }
+    public double Deformation { get; init; }
+    public double Cracking { get; init; }
+    public double CombustionIntensity { get; init; }
+    public double FuelRemaining { get; init; } = 1.0;
+    public double CharLevel { get; init; }
+    public double Dirt { get; init; }
+    public double Blood { get; init; }
+    public double Oil { get; init; }
+    public double Poison { get; init; }
+    public double Soot { get; init; }
+    public double Freshness { get; init; } = 1.0;
+    public double Decay { get; init; }
+    public double Fermentation { get; init; }
+}
+
+public sealed record BritainWorldSimulationCapabilities
+{
+    public double CutPower { get; init; }
+    public double ChopPower { get; init; }
+    public double PiercePower { get; init; }
+    public double StrikePower { get; init; }
+    public double CrushPower { get; init; }
+    public double PryPower { get; init; }
+    public double HeatPower { get; init; }
+    public double IgnitePower { get; init; }
+    public double CoolPower { get; init; }
+    public double ExtinguishPower { get; init; }
+    public double LightPower { get; init; }
+}
+
+public sealed record BritainWorldSimulationVisuals
+{
+    public int DefaultItemId { get; init; }
+    public int BurningItemId { get; init; }
+    public int CharredItemId { get; init; }
+    public int AshItemId { get; init; }
 }
 
 public sealed record BritainTerrainOverride

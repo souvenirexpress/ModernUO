@@ -86,6 +86,8 @@ public abstract partial class WorldSimulationItem : Item, IWorldSimulatedObject,
         _primaryMaterial = primaryMaterial;
     }
 
+    protected void SetPrimaryMaterial(MaterialId material) => _primaryMaterial = material;
+
     public Item Item => this;
     public IWorldObjectState State => this;
     public virtual IReadOnlyList<MaterialFraction> Composition => _emptyComposition;

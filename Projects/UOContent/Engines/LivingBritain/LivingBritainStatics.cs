@@ -351,6 +351,7 @@ public readonly record struct LivingBritainDoorSpec(
 public enum LivingBritainStaticKind
 {
     Item,
+    WorldSimulation,
     Door,
     Container,
     Functional,
@@ -369,6 +370,7 @@ public static class LivingBritainStaticSemantics
 
         return kind switch
         {
+            LivingBritainStaticKind.WorldSimulation => new LivingBritainWorldSimulationItem(definition),
             LivingBritainStaticKind.Container     => new LivingBritainStaticContainer(definition),
             LivingBritainStaticKind.Functional    => new LivingBritainFunctionalItem(definition),
             LivingBritainStaticKind.SpinningWheel => new LivingBritainSpinningWheel(definition),
@@ -381,6 +383,7 @@ public static class LivingBritainStaticSemantics
         var kind = Classify(definition);
         return kind switch
         {
+            LivingBritainStaticKind.WorldSimulation => item is LivingBritainWorldSimulationItem,
             LivingBritainStaticKind.Door =>
                 TryGetDoorSpec(definition.ItemId, out var spec) && item is LivingBritainStaticDoor door && door.DoorClosedId == spec.ClosedId,
             LivingBritainStaticKind.Container     => item is LivingBritainStaticContainer,
@@ -392,6 +395,11 @@ public static class LivingBritainStaticSemantics
 
     public static LivingBritainStaticKind Classify(BritainStaticOverride definition)
     {
+        if (definition.Simulation?.Enabled == true)
+        {
+            return LivingBritainStaticKind.WorldSimulation;
+        }
+
         var functionType = NormalizeFunction(definition.FunctionType);
         return functionType switch
         {
