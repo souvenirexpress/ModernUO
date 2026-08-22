@@ -7,6 +7,7 @@ using Server.Collections;
 using Server.Engines.Plants;
 using Server.Engines.Quests.Hag;
 using Server.Engines.Quests.Matriarch;
+using Server.Engines.WorldSimulation;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Targeting;
@@ -588,6 +589,29 @@ public abstract partial class BaseBeverage : Item, IHasQuantity
     {
         if (IsEmpty || !Pourable || !ValidateUse(from, false))
         {
+            return;
+        }
+
+        if (Content == BeverageType.Water && targ is IWorldSimulatedObject)
+        {
+            var result = InteractionResolver.Resolve(
+                new InteractionContext
+                {
+                    Actor = from,
+                    Source = this,
+                    Target = targ,
+                    Action = WorldInteractionAction.Extinguish,
+                    Environment = new EnvironmentContext()
+                }
+            );
+
+            if (result.Success)
+            {
+                Quantity--;
+                from.PlaySound(0x4E);
+            }
+
+            WorldSimulationMessaging.Send(from, result);
             return;
         }
 

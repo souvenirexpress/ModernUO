@@ -7,5 +7,8 @@ Read and follow all instructions in CLAUDE.md in this repository's root.
 - Use `https://github.com/modernuo/ModernUO.git` as fetch-only `upstream`; never push to it.
 - Never push, force-push, merge, rebase, publish, or deploy without an explicit user request.
 - Put shard-specific game systems in `Projects/UOContent/` and avoid `Projects/Server/` unless an engine change is explicitly requested.
+- The universal material/state/interaction system lives in `Projects/UOContent/Engines/WorldSimulation/`; its material data lives in `Distribution/Data/world-simulation/`.
 - Preserve existing Abadoria changes and legacy behavior. Do not clean or reset the dirty worktree without explicit approval.
+- Preserve legacy item behavior unless an integration is explicitly documented and covered by tests.
 - Run `dotnet build ModernUO.slnx --no-restore` and the relevant tests after C# changes.
+- Do not use Ollama or a local model helper for this repository; verify every diff and test result in the current session.
