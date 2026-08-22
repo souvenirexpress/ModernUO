@@ -1,0 +1,299 @@
+[
+  { "id": "schedule_aldric_hale", "weekday": [
+    { "time": "22:15", "activity": "sleep", "detail": "schläft im eigenen Bett", "destination": { "x": 1458, "y": 1550, "z": 50 }, "outfit": "sleep" },
+    { "time": "05:25", "activity": "breakfast", "detail": "isst Brot und Käse mit Nella", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday", "sitting": true },
+    { "time": "06:00", "activity": "work", "detail": "entzündet die Esse und schmiedet", "destination": { "x": 1423, "y": 1557, "z": 30 }, "outfit": "work" },
+    { "time": "11:45", "activity": "meal", "detail": "isst vor der Schmiede", "destination": { "x": 1426, "y": 1559, "z": 30 }, "outfit": "work", "sitting": true },
+    { "time": "12:30", "activity": "work", "detail": "repariert Werkzeuge und Beschläge", "destination": { "x": 1424, "y": 1558, "z": 30 }, "outfit": "work" },
+    { "time": "18:10", "activity": "leisure", "detail": "trinkt ein Ale im Blauen Eber", "destination": { "x": 1488, "y": 1688, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "20:05", "activity": "home", "detail": "kehrt zu Nella zurück", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday", "sitting": true }
+  ], "restday": [
+    { "time": "22:45", "activity": "sleep", "detail": "schläft länger", "destination": { "x": 1458, "y": 1550, "z": 50 }, "outfit": "sleep" },
+    { "time": "07:15", "activity": "breakfast", "detail": "langes Frühstück", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday", "sitting": true },
+    { "time": "09:30", "activity": "home", "detail": "repariert Scharniere am Haus", "destination": { "x": 1459, "y": 1555, "z": 50 }, "outfit": "work" },
+    { "time": "13:00", "activity": "visit", "detail": "besucht Mara Finch", "destination": { "x": 1469, "y": 1610, "z": 20 }, "outfit": "everyday" },
+    { "time": "18:30", "activity": "home", "detail": "Abendessen mit Nella", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "formal", "sitting": true }
+  ] },
+  { "id": "schedule_nella_hale", "weekday": [
+    { "time": "22:45", "activity": "sleep", "detail": "schläft im Ehebett", "destination": { "x": 1460, "y": 1550, "z": 50 }, "outfit": "sleep" },
+    { "time": "05:40", "activity": "breakfast", "detail": "bereitet Frühstück und Marktlisten vor", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday", "sitting": true },
+    { "time": "07:10", "activity": "work", "detail": "öffnet ihren Marktstand", "destination": { "x": 1460, "y": 1675, "z": 0 }, "outfit": "work" },
+    { "time": "12:20", "activity": "meal", "detail": "isst am Marktstand", "destination": { "x": 1461, "y": 1676, "z": 0 }, "outfit": "work", "sitting": true },
+    { "time": "13:00", "activity": "work", "detail": "prüft Maße und Konten", "destination": { "x": 1460, "y": 1675, "z": 0 }, "outfit": "work" },
+    { "time": "17:05", "activity": "errand", "detail": "holt Öl aus Reeds Lager", "destination": { "x": 1467, "y": 1667, "z": 0 }, "outfit": "everyday" },
+    { "time": "19:00", "activity": "home", "detail": "führt das Haushaltsbuch", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday", "sitting": true }
+  ], "restday": [
+    { "time": "23:00", "activity": "sleep", "detail": "schläft", "destination": { "x": 1460, "y": 1550, "z": 50 }, "outfit": "sleep" },
+    { "time": "07:00", "activity": "breakfast", "detail": "frühstückt mit Aldric", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday", "sitting": true },
+    { "time": "10:00", "activity": "market", "detail": "kauft nur für den Haushalt ein", "destination": { "x": 1457, "y": 1675, "z": 0 }, "outfit": "formal" },
+    { "time": "14:30", "activity": "visit", "detail": "besucht Elsbeth Rowen", "destination": { "x": 1440, "y": 1556, "z": 50 }, "outfit": "formal" },
+    { "time": "18:15", "activity": "home", "detail": "gemeinsames Abendessen", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday", "sitting": true }
+  ] },
+  { "id": "schedule_mara_finch", "weekday": [
+    { "time": "20:45", "activity": "sleep", "detail": "schläft früh", "destination": { "x": 1468, "y": 1609, "z": 20 }, "outfit": "sleep" },
+    { "time": "03:50", "activity": "breakfast", "detail": "isst einen kalten Kanten Brot", "destination": { "x": 1470, "y": 1611, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "04:15", "activity": "work", "detail": "heizt den Backofen und knetet Teig", "destination": { "x": 1448, "y": 1615, "z": 20 }, "outfit": "work" },
+    { "time": "09:15", "activity": "work", "detail": "verkauft frische Brote", "destination": { "x": 1447, "y": 1617, "z": 20 }, "outfit": "work" },
+    { "time": "12:10", "activity": "meal", "detail": "isst mit Tobin", "destination": { "x": 1446, "y": 1616, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "14:00", "activity": "errand", "detail": "liefert Brot an Sweet Dreams", "destination": { "x": 1495, "y": 1616, "z": 20 }, "outfit": "everyday" },
+    { "time": "17:20", "activity": "home", "detail": "bereitet Teig für den Morgen vor", "destination": { "x": 1470, "y": 1611, "z": 20 }, "outfit": "everyday" }
+  ], "restday": [
+    { "time": "21:30", "activity": "sleep", "detail": "schläft", "destination": { "x": 1468, "y": 1609, "z": 20 }, "outfit": "sleep" },
+    { "time": "05:30", "activity": "breakfast", "detail": "kleines Familienfrühstück", "destination": { "x": 1470, "y": 1611, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "08:00", "activity": "work", "detail": "backt nur eine kleine Sonntagscharge", "destination": { "x": 1448, "y": 1615, "z": 20 }, "outfit": "work" },
+    { "time": "12:30", "activity": "visit", "detail": "isst mit Lysa und Corin", "destination": { "x": 1495, "y": 1616, "z": 20 }, "outfit": "formal", "sitting": true },
+    { "time": "17:00", "activity": "home", "detail": "ruht und liest alte Rezepte", "destination": { "x": 1470, "y": 1611, "z": 20 }, "outfit": "everyday", "sitting": true }
+  ] },
+  { "id": "schedule_tobin_finch", "weekday": [
+    { "time": "22:30", "activity": "sleep", "detail": "schläft im kleinen Bett", "destination": { "x": 1469, "y": 1614, "z": 20 }, "outfit": "sleep" },
+    { "time": "04:10", "activity": "breakfast", "detail": "verschläft beinahe das Frühstück", "destination": { "x": 1470, "y": 1611, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "04:35", "activity": "work", "detail": "trägt Holz und knetet Teig", "destination": { "x": 1449, "y": 1615, "z": 20 }, "outfit": "work" },
+    { "time": "10:00", "activity": "errand", "detail": "bringt Brot zum Markt", "destination": { "x": 1460, "y": 1675, "z": 0 }, "outfit": "work" },
+    { "time": "12:10", "activity": "meal", "detail": "isst mit Mara", "destination": { "x": 1446, "y": 1616, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "13:00", "activity": "work", "detail": "reinigt Backstube und Formen", "destination": { "x": 1448, "y": 1616, "z": 20 }, "outfit": "work" },
+    { "time": "17:30", "activity": "leisure", "detail": "trifft Pell oder Alina am Markt", "destination": { "x": 1458, "y": 1676, "z": 0 }, "outfit": "everyday" },
+    { "time": "20:15", "activity": "home", "detail": "übt leise auf seiner Pfeife", "destination": { "x": 1470, "y": 1611, "z": 20 }, "outfit": "everyday" }
+  ], "restday": [
+    { "time": "23:30", "activity": "sleep", "detail": "schläft länger", "destination": { "x": 1469, "y": 1614, "z": 20 }, "outfit": "sleep" },
+    { "time": "07:30", "activity": "breakfast", "detail": "frühstückt", "destination": { "x": 1470, "y": 1611, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "10:30", "activity": "leisure", "detail": "spaziert mit Alina", "destination": { "x": 1478, "y": 1658, "z": 0 }, "outfit": "formal" },
+    { "time": "14:00", "activity": "visit", "detail": "lernt bei Corin ein Rezept", "destination": { "x": 1498, "y": 1618, "z": 20 }, "outfit": "work" },
+    { "time": "19:00", "activity": "home", "detail": "spielt Pfeife", "destination": { "x": 1470, "y": 1611, "z": 20 }, "outfit": "everyday" }
+  ] },
+  { "id": "schedule_edwin_cobb", "weekday": [
+    { "time": "22:40", "activity": "sleep", "detail": "schläft", "destination": { "x": 1416, "y": 1557, "z": 30 }, "outfit": "sleep" },
+    { "time": "06:45", "activity": "breakfast", "detail": "trinkt Kräutertee", "destination": { "x": 1418, "y": 1559, "z": 30 }, "outfit": "everyday", "sitting": true },
+    { "time": "08:15", "activity": "work", "detail": "öffnet das Schreibkontor", "destination": { "x": 1418, "y": 1584, "z": 30 }, "outfit": "work", "sitting": true },
+    { "time": "12:30", "activity": "meal", "detail": "isst ein Ei und Brot", "destination": { "x": 1417, "y": 1585, "z": 30 }, "outfit": "work", "sitting": true },
+    { "time": "13:15", "activity": "work", "detail": "kopiert Verträge und Wachberichte", "destination": { "x": 1418, "y": 1584, "z": 30 }, "outfit": "work", "sitting": true },
+    { "time": "17:30", "activity": "visit", "detail": "holt Tee bei Hilda", "destination": { "x": 1500, "y": 1584, "z": 20 }, "outfit": "everyday" },
+    { "time": "19:00", "activity": "home", "detail": "arbeitet an seiner Chronik", "destination": { "x": 1418, "y": 1559, "z": 30 }, "outfit": "everyday", "sitting": true }
+  ], "restday": [
+    { "time": "23:00", "activity": "sleep", "detail": "schläft", "destination": { "x": 1416, "y": 1557, "z": 30 }, "outfit": "sleep" },
+    { "time": "08:00", "activity": "breakfast", "detail": "liest beim Tee", "destination": { "x": 1418, "y": 1559, "z": 30 }, "outfit": "everyday", "sitting": true },
+    { "time": "10:30", "activity": "leisure", "detail": "ordnet private Briefe", "destination": { "x": 1418, "y": 1559, "z": 30 }, "outfit": "everyday", "sitting": true },
+    { "time": "14:00", "activity": "visit", "detail": "spaziert zu Hildas Kräuterstube", "destination": { "x": 1500, "y": 1584, "z": 20 }, "outfit": "formal" },
+    { "time": "18:00", "activity": "home", "detail": "isst zu Hause", "destination": { "x": 1418, "y": 1559, "z": 30 }, "outfit": "everyday", "sitting": true }
+  ] },
+  { "id": "schedule_elsbeth_rowen", "weekday": [
+    { "time": "22:20", "activity": "sleep", "detail": "schläft", "destination": { "x": 1438, "y": 1550, "z": 50 }, "outfit": "sleep" },
+    { "time": "06:20", "activity": "breakfast", "detail": "prüft beim Frühstück den Tagesplan", "destination": { "x": 1440, "y": 1556, "z": 50 }, "outfit": "everyday", "sitting": true },
+    { "time": "07:45", "activity": "work", "detail": "richtet Webstuhl und Schneidertisch", "destination": { "x": 1473, "y": 1685, "z": 0 }, "outfit": "work" },
+    { "time": "12:00", "activity": "meal", "detail": "isst mit Alina in der Werkstatt", "destination": { "x": 1474, "y": 1687, "z": 0 }, "outfit": "work", "sitting": true },
+    { "time": "12:45", "activity": "work", "detail": "schneidert Kundenaufträge", "destination": { "x": 1473, "y": 1685, "z": 0 }, "outfit": "work" },
+    { "time": "17:15", "activity": "errand", "detail": "prüft Nellas Marktstoffe", "destination": { "x": 1460, "y": 1675, "z": 0 }, "outfit": "everyday" },
+    { "time": "19:00", "activity": "home", "detail": "stickt oder liest", "destination": { "x": 1440, "y": 1556, "z": 50 }, "outfit": "everyday", "sitting": true }
+  ], "restday": [
+    { "time": "23:00", "activity": "sleep", "detail": "schläft", "destination": { "x": 1438, "y": 1550, "z": 50 }, "outfit": "sleep" },
+    { "time": "07:45", "activity": "breakfast", "detail": "spätes Frühstück", "destination": { "x": 1440, "y": 1556, "z": 50 }, "outfit": "everyday", "sitting": true },
+    { "time": "10:00", "activity": "home", "detail": "bessert Hauswäsche aus", "destination": { "x": 1441, "y": 1556, "z": 50 }, "outfit": "work" },
+    { "time": "14:30", "activity": "visit", "detail": "empfängt Nella oder besucht Alina", "destination": { "x": 1450, "y": 1706, "z": 0 }, "outfit": "formal" },
+    { "time": "18:30", "activity": "home", "detail": "isst mit Roland", "destination": { "x": 1440, "y": 1556, "z": 50 }, "outfit": "formal", "sitting": true }
+  ] },
+  { "id": "schedule_alina_ward", "weekday": [
+    { "time": "22:50", "activity": "sleep", "detail": "schläft", "destination": { "x": 1452, "y": 1705, "z": 0 }, "outfit": "sleep" },
+    { "time": "06:50", "activity": "breakfast", "detail": "isst mit Osric und Maelin", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true },
+    { "time": "08:00", "activity": "work", "detail": "spinnt Garn und bedient den Webstuhl", "destination": { "x": 1473, "y": 1689, "z": 0 }, "outfit": "work" },
+    { "time": "12:00", "activity": "meal", "detail": "isst mit Elsbeth", "destination": { "x": 1474, "y": 1687, "z": 0 }, "outfit": "work", "sitting": true },
+    { "time": "12:45", "activity": "work", "detail": "webt und übt Zuschnitt", "destination": { "x": 1473, "y": 1685, "z": 0 }, "outfit": "work" },
+    { "time": "17:30", "activity": "leisure", "detail": "zeichnet Kleider am Marktbrunnen", "destination": { "x": 1458, "y": 1676, "z": 0 }, "outfit": "everyday", "sitting": true },
+    { "time": "19:30", "activity": "home", "detail": "isst im Haushalt Ward", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true }
+  ], "restday": [
+    { "time": "23:30", "activity": "sleep", "detail": "schläft", "destination": { "x": 1452, "y": 1705, "z": 0 }, "outfit": "sleep" },
+    { "time": "08:15", "activity": "breakfast", "detail": "frühstückt", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true },
+    { "time": "10:30", "activity": "leisure", "detail": "spaziert mit Tobin", "destination": { "x": 1478, "y": 1658, "z": 0 }, "outfit": "formal" },
+    { "time": "14:30", "activity": "home", "detail": "zeichnet eigene Entwürfe", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true },
+    { "time": "18:30", "activity": "visit", "detail": "gemeinsames Essen mit Elsbeth", "destination": { "x": 1440, "y": 1556, "z": 50 }, "outfit": "formal", "sitting": true }
+  ] },
+  { "id": "schedule_tomas_reed", "weekday": [
+    { "time": "23:20", "activity": "sleep", "detail": "schläft", "destination": { "x": 1508, "y": 1592, "z": 10 }, "outfit": "sleep" },
+    { "time": "07:15", "activity": "breakfast", "detail": "liest Lieferlisten", "destination": { "x": 1509, "y": 1595, "z": 10 }, "outfit": "everyday", "sitting": true },
+    { "time": "08:30", "activity": "work", "detail": "öffnet Lager und Kontor", "destination": { "x": 1467, "y": 1667, "z": 0 }, "outfit": "work" },
+    { "time": "12:30", "activity": "meal", "detail": "isst im Blauen Eber", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "13:20", "activity": "work", "detail": "prüft Waren und Rechnungen", "destination": { "x": 1467, "y": 1667, "z": 0 }, "outfit": "work" },
+    { "time": "18:00", "activity": "market", "detail": "spricht mit Nella über Preise", "destination": { "x": 1460, "y": 1675, "z": 0 }, "outfit": "formal" },
+    { "time": "20:00", "activity": "home", "detail": "führt sein privates Kassenbuch", "destination": { "x": 1509, "y": 1595, "z": 10 }, "outfit": "everyday", "sitting": true }
+  ], "restday": [
+    { "time": "23:45", "activity": "sleep", "detail": "schläft", "destination": { "x": 1508, "y": 1592, "z": 10 }, "outfit": "sleep" },
+    { "time": "08:45", "activity": "breakfast", "detail": "spätes Frühstück", "destination": { "x": 1509, "y": 1595, "z": 10 }, "outfit": "everyday", "sitting": true },
+    { "time": "11:00", "activity": "leisure", "detail": "spaziert am Markt", "destination": { "x": 1458, "y": 1676, "z": 0 }, "outfit": "formal" },
+    { "time": "14:00", "activity": "visit", "detail": "besucht Edwin wegen privater Briefe", "destination": { "x": 1418, "y": 1558, "z": 30 }, "outfit": "formal" },
+    { "time": "18:30", "activity": "leisure", "detail": "trinkt Wein im Blauen Eber", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "formal", "sitting": true }
+  ] },
+  { "id": "schedule_hilda_mercer", "weekday": [
+    { "time": "21:45", "activity": "sleep", "detail": "schläft", "destination": { "x": 1504, "y": 1564, "z": 20 }, "outfit": "sleep" },
+    { "time": "05:50", "activity": "breakfast", "detail": "brüht Kräutertee", "destination": { "x": 1506, "y": 1566, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "07:00", "activity": "errand", "detail": "sammelt Kräuter am grünen Rand", "destination": { "x": 1510, "y": 1548, "z": 20 }, "outfit": "work" },
+    { "time": "09:00", "activity": "work", "detail": "behandelt Bürger in der Kräuterstube", "destination": { "x": 1500, "y": 1584, "z": 20 }, "outfit": "work" },
+    { "time": "12:40", "activity": "meal", "detail": "isst Suppe im Hinterraum", "destination": { "x": 1501, "y": 1585, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "13:20", "activity": "work", "detail": "mischt Salben und berät Patienten", "destination": { "x": 1500, "y": 1584, "z": 20 }, "outfit": "work" },
+    { "time": "17:30", "activity": "visit", "detail": "sieht nach Edwin oder Maelin", "destination": { "x": 1418, "y": 1584, "z": 30 }, "outfit": "everyday" },
+    { "time": "19:10", "activity": "home", "detail": "trocknet Kräuter", "destination": { "x": 1506, "y": 1566, "z": 20 }, "outfit": "everyday" }
+  ], "restday": [
+    { "time": "22:15", "activity": "sleep", "detail": "schläft", "destination": { "x": 1504, "y": 1564, "z": 20 }, "outfit": "sleep" },
+    { "time": "07:00", "activity": "breakfast", "detail": "trinkt Tee", "destination": { "x": 1506, "y": 1566, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "09:30", "activity": "leisure", "detail": "pflegt den Kräutergarten", "destination": { "x": 1510, "y": 1548, "z": 20 }, "outfit": "work" },
+    { "time": "14:00", "activity": "visit", "detail": "trinkt Tee mit Edwin", "destination": { "x": 1418, "y": 1559, "z": 30 }, "outfit": "formal", "sitting": true },
+    { "time": "18:00", "activity": "home", "detail": "liest Heilkunde", "destination": { "x": 1506, "y": 1566, "z": 20 }, "outfit": "everyday", "sitting": true }
+  ] },
+  { "id": "schedule_garran_pike", "weekday": [
+    { "time": "22:10", "activity": "sleep", "detail": "schläft", "destination": { "x": 1386, "y": 1585, "z": 30 }, "outfit": "sleep" },
+    { "time": "05:45", "activity": "breakfast", "detail": "isst Brot und Zwiebeln", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday", "sitting": true },
+    { "time": "06:30", "activity": "work", "detail": "meldet sich am Fuhrhof", "destination": { "x": 1442, "y": 1662, "z": 0 }, "outfit": "work" },
+    { "time": "09:30", "activity": "work", "detail": "trägt Kisten in Reeds Lager", "destination": { "x": 1467, "y": 1667, "z": 0 }, "outfit": "work" },
+    { "time": "12:00", "activity": "meal", "detail": "isst am Fuhrhof", "destination": { "x": 1442, "y": 1662, "z": 0 }, "outfit": "work", "sitting": true },
+    { "time": "13:00", "activity": "work", "detail": "holt wechselnde Tagesaufträge", "destination": { "x": 1442, "y": 1662, "z": 0 }, "outfit": "work" },
+    { "time": "18:00", "activity": "leisure", "detail": "trinkt mit Bran oder Pell", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "20:15", "activity": "home", "detail": "kehrt ins Arbeiterhaus zurück", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday" }
+  ], "restday": [
+    { "time": "23:00", "activity": "sleep", "detail": "schläft", "destination": { "x": 1386, "y": 1585, "z": 30 }, "outfit": "sleep" },
+    { "time": "07:30", "activity": "breakfast", "detail": "frühstückt mit Pell", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday", "sitting": true },
+    { "time": "10:00", "activity": "home", "detail": "repariert den alten Karren", "destination": { "x": 1390, "y": 1590, "z": 30 }, "outfit": "work" },
+    { "time": "15:00", "activity": "leisure", "detail": "spaziert zum Markt", "destination": { "x": 1458, "y": 1676, "z": 0 }, "outfit": "everyday" },
+    { "time": "18:30", "activity": "home", "detail": "gemeinsames Essen mit Bran und Pell", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "formal", "sitting": true }
+  ] },
+  { "id": "schedule_beatrice_vale", "weekday": [
+    { "time": "01:00", "activity": "sleep", "detail": "schläft nach Tavernenende", "destination": { "x": 1459, "y": 1720, "z": 6 }, "outfit": "sleep" },
+    { "time": "09:00", "activity": "breakfast", "detail": "spätes Frühstück", "destination": { "x": 1461, "y": 1722, "z": 6 }, "outfit": "everyday", "sitting": true },
+    { "time": "11:00", "activity": "errand", "detail": "kauft Vorräte am Markt", "destination": { "x": 1460, "y": 1675, "z": 0 }, "outfit": "everyday" },
+    { "time": "13:00", "activity": "work", "detail": "öffnet den Blauen Eber", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "work" },
+    { "time": "17:30", "activity": "meal", "detail": "isst vor dem Abendandrang", "destination": { "x": 1488, "y": 1688, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "18:00", "activity": "work", "detail": "bedient Gäste und führt Tabs", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "work" },
+    { "time": "23:50", "activity": "home", "detail": "schließt ab und geht heim", "destination": { "x": 1461, "y": 1722, "z": 6 }, "outfit": "everyday" }
+  ], "restday": [
+    { "time": "01:30", "activity": "sleep", "detail": "schläft", "destination": { "x": 1459, "y": 1720, "z": 6 }, "outfit": "sleep" },
+    { "time": "09:30", "activity": "breakfast", "detail": "spätes Frühstück", "destination": { "x": 1461, "y": 1722, "z": 6 }, "outfit": "everyday", "sitting": true },
+    { "time": "12:00", "activity": "visit", "detail": "tauscht Rezepte mit Corin", "destination": { "x": 1498, "y": 1618, "z": 20 }, "outfit": "formal" },
+    { "time": "16:00", "activity": "work", "detail": "öffnet nur zum Abend", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "work" },
+    { "time": "22:30", "activity": "home", "detail": "schließt früher", "destination": { "x": 1461, "y": 1722, "z": 6 }, "outfit": "everyday" }
+  ] },
+  { "id": "schedule_osric_tanner", "weekday": [
+    { "time": "21:50", "activity": "sleep", "detail": "schläft im Hinterzimmer", "destination": { "x": 1449, "y": 1704, "z": 0 }, "outfit": "sleep" },
+    { "time": "05:30", "activity": "breakfast", "detail": "isst Rye bread", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true },
+    { "time": "06:20", "activity": "work", "detail": "weicht Häute und prüft Gerblohe", "destination": { "x": 1420, "y": 1720, "z": 20 }, "outfit": "work" },
+    { "time": "11:30", "activity": "meal", "detail": "isst am Werkhof", "destination": { "x": 1421, "y": 1721, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "12:10", "activity": "work", "detail": "schneidet Leder und sortiert Riemen", "destination": { "x": 1420, "y": 1720, "z": 20 }, "outfit": "work" },
+    { "time": "17:00", "activity": "errand", "detail": "holt Beschläge bei Aldric", "destination": { "x": 1424, "y": 1558, "z": 30 }, "outfit": "everyday" },
+    { "time": "19:00", "activity": "home", "detail": "isst mit dem Haushalt Ward", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true }
+  ], "restday": [
+    { "time": "22:30", "activity": "sleep", "detail": "schläft", "destination": { "x": 1449, "y": 1704, "z": 0 }, "outfit": "sleep" },
+    { "time": "07:00", "activity": "breakfast", "detail": "frühstückt", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true },
+    { "time": "09:30", "activity": "home", "detail": "repariert Stiefel und Riemen", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "work" },
+    { "time": "14:00", "activity": "leisure", "detail": "geht am südlichen Wasser spazieren", "destination": { "x": 1425, "y": 1740, "z": 0 }, "outfit": "formal" },
+    { "time": "18:00", "activity": "home", "detail": "gemeinsames Abendessen", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true }
+  ] },
+  { "id": "schedule_lysa_marr", "weekday": [
+    { "time": "23:45", "activity": "sleep", "detail": "schläft im privaten Obergeschoss", "destination": { "x": 1494, "y": 1612, "z": 40 }, "outfit": "sleep" },
+    { "time": "05:45", "activity": "breakfast", "detail": "prüft Gästeliste und Schlüssel", "destination": { "x": 1496, "y": 1616, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "06:30", "activity": "work", "detail": "öffnet Empfang und Schankstube", "destination": { "x": 1495, "y": 1616, "z": 20 }, "outfit": "work" },
+    { "time": "11:30", "activity": "work", "detail": "ordnet Zimmer und Vorräte", "destination": { "x": 1498, "y": 1615, "z": 20 }, "outfit": "work" },
+    { "time": "13:00", "activity": "meal", "detail": "isst mit Corin", "destination": { "x": 1497, "y": 1617, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "14:00", "activity": "work", "detail": "empfängt Gäste und führt das Hausbuch", "destination": { "x": 1495, "y": 1616, "z": 20 }, "outfit": "work" },
+    { "time": "20:30", "activity": "home", "detail": "prüft Türen und obere Zimmer", "destination": { "x": 1494, "y": 1612, "z": 40 }, "outfit": "everyday" }
+  ], "restday": [
+    { "time": "00:15", "activity": "sleep", "detail": "schläft", "destination": { "x": 1494, "y": 1612, "z": 40 }, "outfit": "sleep" },
+    { "time": "07:00", "activity": "breakfast", "detail": "frühstückt mit Corin", "destination": { "x": 1497, "y": 1617, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "09:00", "activity": "work", "detail": "hält nur einen kleinen Empfangsdienst", "destination": { "x": 1495, "y": 1616, "z": 20 }, "outfit": "work" },
+    { "time": "13:00", "activity": "visit", "detail": "gemeinsames Essen mit Mara", "destination": { "x": 1497, "y": 1617, "z": 20 }, "outfit": "formal", "sitting": true },
+    { "time": "18:30", "activity": "home", "detail": "liest bei der Feuerstelle", "destination": { "x": 1497, "y": 1617, "z": 20 }, "outfit": "everyday", "sitting": true }
+  ] },
+  { "id": "schedule_corin_marr", "weekday": [
+    { "time": "00:20", "activity": "sleep", "detail": "schläft oben", "destination": { "x": 1500, "y": 1612, "z": 40 }, "outfit": "sleep" },
+    { "time": "05:15", "activity": "breakfast", "detail": "kostet den ersten Brotteig", "destination": { "x": 1498, "y": 1618, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "05:40", "activity": "work", "detail": "bereitet Frühstück für Gäste", "destination": { "x": 1498, "y": 1618, "z": 20 }, "outfit": "work" },
+    { "time": "10:00", "activity": "errand", "detail": "holt Brot von Mara", "destination": { "x": 1448, "y": 1615, "z": 20 }, "outfit": "work" },
+    { "time": "11:00", "activity": "work", "detail": "kocht die Mittagsgerichte", "destination": { "x": 1498, "y": 1618, "z": 20 }, "outfit": "work" },
+    { "time": "15:00", "activity": "meal", "detail": "isst spät mit Lysa", "destination": { "x": 1497, "y": 1617, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "16:00", "activity": "work", "detail": "bereitet Abendessen und Brühe", "destination": { "x": 1498, "y": 1618, "z": 20 }, "outfit": "work" },
+    { "time": "21:30", "activity": "leisure", "detail": "sitzt kurz bei der Feuerstelle", "destination": { "x": 1497, "y": 1617, "z": 20 }, "outfit": "everyday", "sitting": true }
+  ], "restday": [
+    { "time": "00:45", "activity": "sleep", "detail": "schläft", "destination": { "x": 1500, "y": 1612, "z": 40 }, "outfit": "sleep" },
+    { "time": "07:00", "activity": "breakfast", "detail": "frühstückt mit Lysa", "destination": { "x": 1497, "y": 1617, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "09:00", "activity": "work", "detail": "kocht einen großen Eintopf", "destination": { "x": 1498, "y": 1618, "z": 20 }, "outfit": "work" },
+    { "time": "13:00", "activity": "visit", "detail": "empfängt Mara zum Essen", "destination": { "x": 1497, "y": 1617, "z": 20 }, "outfit": "formal", "sitting": true },
+    { "time": "17:00", "activity": "leisure", "detail": "tauscht Rezepte mit Beatrice", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "formal", "sitting": true }
+  ] },
+  { "id": "schedule_pell_dyer", "weekday": [
+    { "time": "00:10", "activity": "sleep", "detail": "schläft im Arbeiterhaus", "destination": { "x": 1390, "y": 1590, "z": 30 }, "outfit": "sleep" },
+    { "time": "07:40", "activity": "breakfast", "detail": "isst übrig gebliebenes Brot", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday", "sitting": true },
+    { "time": "09:00", "activity": "market", "detail": "fragt nach Färbe- und Hilfsarbeiten", "destination": { "x": 1460, "y": 1675, "z": 0 }, "outfit": "work" },
+    { "time": "12:30", "activity": "meal", "detail": "isst auf Kredit im Blauen Eber", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "13:30", "activity": "work", "detail": "hilft Nella oder am Fuhrhof", "destination": { "x": 1442, "y": 1662, "z": 0 }, "outfit": "work" },
+    { "time": "17:30", "activity": "leisure", "detail": "würfelt am Tavernenrand", "destination": { "x": 1489, "y": 1689, "z": 20 }, "outfit": "everyday", "sitting": true },
+    { "time": "21:30", "activity": "home", "detail": "kehrt zu Garran zurück", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday" }
+  ], "restday": [
+    { "time": "01:00", "activity": "sleep", "detail": "schläft lange", "destination": { "x": 1390, "y": 1590, "z": 30 }, "outfit": "sleep" },
+    { "time": "09:30", "activity": "breakfast", "detail": "spätes Frühstück", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday", "sitting": true },
+    { "time": "11:00", "activity": "leisure", "detail": "probiert neue Farbmischungen", "destination": { "x": 1391, "y": 1589, "z": 30 }, "outfit": "work" },
+    { "time": "15:00", "activity": "market", "detail": "beobachtet Leute am Markt", "destination": { "x": 1458, "y": 1676, "z": 0 }, "outfit": "formal" },
+    { "time": "18:30", "activity": "home", "detail": "isst mit Garran und Bran", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday", "sitting": true }
+  ] },
+  { "id": "schedule_roland_vey", "weekday": [
+    { "time": "22:30", "activity": "sleep", "detail": "schläft in Rowens Gästezimmer", "destination": { "x": 1442, "y": 1550, "z": 50 }, "outfit": "sleep" },
+    { "time": "05:30", "activity": "breakfast", "detail": "liest Nachtberichte beim Frühstück", "destination": { "x": 1440, "y": 1556, "z": 50 }, "outfit": "everyday", "sitting": true },
+    { "time": "06:20", "activity": "work", "detail": "koordiniert den Frühschichtwechsel", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "work" },
+    { "time": "09:30", "activity": "patrol", "detail": "prüft Markt und nördliche Schmiede", "destination": { "x": 1458, "y": 1676, "z": 0 }, "outfit": "work" },
+    { "time": "12:00", "activity": "meal", "detail": "isst in der Wachstube", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "13:00", "activity": "work", "detail": "prüft Berichte mit Edwin", "destination": { "x": 1418, "y": 1584, "z": 30 }, "outfit": "work" },
+    { "time": "17:30", "activity": "patrol", "detail": "begleitet den Spätschichtwechsel", "destination": { "x": 1467, "y": 1667, "z": 0 }, "outfit": "work" },
+    { "time": "19:30", "activity": "home", "detail": "isst mit Elsbeth", "destination": { "x": 1440, "y": 1556, "z": 50 }, "outfit": "everyday", "sitting": true }
+  ], "restday": [
+    { "time": "23:00", "activity": "sleep", "detail": "schläft", "destination": { "x": 1442, "y": 1550, "z": 50 }, "outfit": "sleep" },
+    { "time": "07:00", "activity": "breakfast", "detail": "frühstückt mit Elsbeth", "destination": { "x": 1440, "y": 1556, "z": 50 }, "outfit": "everyday", "sitting": true },
+    { "time": "09:30", "activity": "work", "detail": "kurze Inspektion der Wachstube", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "work" },
+    { "time": "14:00", "activity": "leisure", "detail": "trainiert allein am Hof", "destination": { "x": 1408, "y": 1715, "z": 20 }, "outfit": "work" },
+    { "time": "18:30", "activity": "home", "detail": "gemeinsames Abendessen", "destination": { "x": 1440, "y": 1556, "z": 50 }, "outfit": "formal", "sitting": true }
+  ] },
+  { "id": "schedule_isembard_cole", "weekday": [
+    { "time": "21:30", "activity": "sleep", "detail": "schläft im Haus Hale", "destination": { "x": 1470, "y": 1550, "z": 50 }, "outfit": "sleep" },
+    { "time": "04:45", "activity": "breakfast", "detail": "isst vor der Frühschicht", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday", "sitting": true },
+    { "time": "05:30", "activity": "work", "detail": "meldet sich zur Frühschicht", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "work" },
+    { "time": "06:00", "activity": "patrol", "detail": "bewacht Markt und Schmiede", "destination": { "x": 1424, "y": 1558, "z": 30 }, "outfit": "work" },
+    { "time": "09:30", "activity": "patrol", "detail": "geht über den westlichen Markt", "destination": { "x": 1458, "y": 1676, "z": 0 }, "outfit": "work" },
+    { "time": "12:15", "activity": "meal", "detail": "isst im Blauen Eber", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "13:00", "activity": "patrol", "detail": "prüft das Warenlager", "destination": { "x": 1467, "y": 1667, "z": 0 }, "outfit": "work" },
+    { "time": "14:30", "activity": "home", "detail": "Dienstende und Ruhe", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday" }
+  ], "restday": [
+    { "time": "22:30", "activity": "sleep", "detail": "schläft", "destination": { "x": 1470, "y": 1550, "z": 50 }, "outfit": "sleep" },
+    { "time": "07:30", "activity": "breakfast", "detail": "liest mit Nella", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday", "sitting": true },
+    { "time": "10:00", "activity": "leisure", "detail": "pflegt Schild und Stiefel", "destination": { "x": 1461, "y": 1554, "z": 50 }, "outfit": "work" },
+    { "time": "14:00", "activity": "visit", "detail": "trinkt ein Ale bei Beatrice", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "formal", "sitting": true },
+    { "time": "18:00", "activity": "home", "detail": "isst mit den Hales", "destination": { "x": 1462, "y": 1553, "z": 50 }, "outfit": "everyday", "sitting": true }
+  ] },
+  { "id": "schedule_maelin_shaw", "weekday": [
+    { "time": "01:10", "activity": "sleep", "detail": "schläft nach der Spätschicht", "destination": { "x": 1464, "y": 1705, "z": 0 }, "outfit": "sleep" },
+    { "time": "09:00", "activity": "breakfast", "detail": "spätes Frühstück im Haus Ward", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true },
+    { "time": "11:00", "activity": "errand", "detail": "besucht Hilda wegen der Schulter", "destination": { "x": 1500, "y": 1584, "z": 20 }, "outfit": "everyday" },
+    { "time": "13:30", "activity": "work", "detail": "meldet sich zur Spätschicht", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "work" },
+    { "time": "14:00", "activity": "patrol", "detail": "bewacht Lager und Südweg", "destination": { "x": 1467, "y": 1667, "z": 0 }, "outfit": "work" },
+    { "time": "18:00", "activity": "meal", "detail": "isst an der Wachstube", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "19:00", "activity": "patrol", "detail": "prüft Taverne und Markt", "destination": { "x": 1490, "y": 1688, "z": 20 }, "outfit": "work" },
+    { "time": "22:00", "activity": "work", "detail": "übergibt an Bran", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "work" },
+    { "time": "23:00", "activity": "home", "detail": "kehrt ins Haus Ward zurück", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday" }
+  ], "restday": [
+    { "time": "00:30", "activity": "sleep", "detail": "schläft", "destination": { "x": 1464, "y": 1705, "z": 0 }, "outfit": "sleep" },
+    { "time": "09:30", "activity": "breakfast", "detail": "frühstückt", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true },
+    { "time": "11:30", "activity": "leisure", "detail": "liest und schont die Schulter", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true },
+    { "time": "15:00", "activity": "visit", "detail": "trinkt Tee bei Hilda", "destination": { "x": 1500, "y": 1584, "z": 20 }, "outfit": "formal", "sitting": true },
+    { "time": "19:00", "activity": "home", "detail": "isst mit Alina und Osric", "destination": { "x": 1450, "y": 1707, "z": 0 }, "outfit": "everyday", "sitting": true }
+  ] },
+  { "id": "schedule_bran_orme", "weekday": [
+    { "time": "08:30", "activity": "sleep", "detail": "schläft tagsüber im Arbeiterhaus", "destination": { "x": 1384, "y": 1584, "z": 30 }, "outfit": "sleep" },
+    { "time": "16:30", "activity": "breakfast", "detail": "isst seine erste Mahlzeit", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday", "sitting": true },
+    { "time": "18:00", "activity": "leisure", "detail": "spricht kurz mit Garran", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday" },
+    { "time": "21:30", "activity": "work", "detail": "meldet sich zur Nachtwache", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "work" },
+    { "time": "22:00", "activity": "patrol", "detail": "übernimmt von Maelin und prüft das Lager", "destination": { "x": 1467, "y": 1667, "z": 0 }, "outfit": "work" },
+    { "time": "00:30", "activity": "meal", "detail": "isst kalte Pastete in der Wachstube", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "work", "sitting": true },
+    { "time": "01:00", "activity": "patrol", "detail": "prüft Gasthaus und Westwege", "destination": { "x": 1495, "y": 1616, "z": 20 }, "outfit": "work" },
+    { "time": "04:00", "activity": "patrol", "detail": "frühe Runde an Markt und Schmiede", "destination": { "x": 1424, "y": 1558, "z": 30 }, "outfit": "work" },
+    { "time": "06:00", "activity": "work", "detail": "übergibt an Isembard", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "work" },
+    { "time": "07:00", "activity": "home", "detail": "kehrt leise nach Hause zurück", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday" }
+  ], "restday": [
+    { "time": "02:00", "activity": "sleep", "detail": "schläft nach verkürzter Nachtwache", "destination": { "x": 1384, "y": 1584, "z": 30 }, "outfit": "sleep" },
+    { "time": "11:00", "activity": "breakfast", "detail": "spätes Frühstück", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday", "sitting": true },
+    { "time": "13:00", "activity": "leisure", "detail": "pflegt seine Laterne", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "work" },
+    { "time": "17:00", "activity": "visit", "detail": "trifft Maelin zur ruhigen Übergabe", "destination": { "x": 1410, "y": 1718, "z": 20 }, "outfit": "formal" },
+    { "time": "18:30", "activity": "home", "detail": "isst mit Garran und Pell", "destination": { "x": 1388, "y": 1588, "z": 30 }, "outfit": "everyday", "sitting": true },
+    { "time": "22:30", "activity": "leisure", "detail": "kurzer freiwilliger Nachtspaziergang", "destination": { "x": 1458, "y": 1676, "z": 0 }, "outfit": "formal" }
+  ] }
+]

@@ -1,4 +1,6 @@
 # Distribution Files
+/Distribution/Configuration/
+/Distribution/createdump
 /Distribution/Logger
 /Distribution/Logger.*
 /Distribution/ModernUO

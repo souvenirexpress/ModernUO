@@ -252,18 +252,6 @@ public static partial class CharacterCreation
             SetSkills(newChar, profession?.Skills ?? args.Skills);
             GiveProfessionItems(newChar, profession, args.ShirtHue, args.PantsHue);
 
-            if (race.ValidateHair(newChar, args.HairID))
-            {
-                newChar.HairItemID = args.HairID;
-                newChar.HairHue = race.ClipHairHue(args.HairHue & 0x3FFF);
-            }
-
-            if (race.ValidateFacialHair(newChar, args.BeardID))
-            {
-                newChar.FacialHairItemID = args.BeardID;
-                newChar.FacialHairHue = race.ClipHairHue(args.BeardHue & 0x3FFF);
-            }
-
             if (TestCenter.Enabled)
             {
                 TestCenter.FillBankbox(newChar);
@@ -285,6 +273,21 @@ public static partial class CharacterCreation
             newChar.AddItem(new StaffRobe(newChar.AccessLevel));
         }
 
+        var appearanceRace = newChar.Race;
+        if (appearanceRace.ValidateHair(newChar, args.HairID))
+        {
+            newChar.HairItemID = args.HairID;
+            newChar.HairHue = appearanceRace.ClipHairHue(args.HairHue & 0x3FFF);
+        }
+
+        if (appearanceRace.ValidateFacialHair(newChar, args.BeardID))
+        {
+            newChar.FacialHairItemID = args.BeardID;
+            newChar.FacialHairHue = appearanceRace.ClipHairHue(args.BeardHue & 0x3FFF);
+        }
+
+        ApplyBrowserClothing(newChar, args.BrowserClothing, args.ShirtHue);
+
         var city = GetStartLocation(args);
         newChar.MoveToWorld(city.Location, city.Map);
 
@@ -299,6 +302,78 @@ public static partial class CharacterCreation
             city.Map);
 
         new WelcomeTimer(newChar).Start();
+    }
+
+    private static readonly Dictionary<int, Layer> BrowserClothingLayers = new()
+    {
+        [0x2798] = Layer.Helm, [0x278F] = Layer.Helm, [0x2306] = Layer.Helm, [0x1713] = Layer.Helm,
+        [0x1714] = Layer.Helm, [0x1715] = Layer.Helm, [0x1544] = Layer.Helm, [0x1540] = Layer.Helm,
+        [0x1545] = Layer.Helm, [0x1547] = Layer.Helm, [0x1549] = Layer.Helm, [0x154B] = Layer.Helm,
+        [0x1716] = Layer.Helm, [0x1717] = Layer.Helm, [0x141B] = Layer.Helm, [0x1718] = Layer.Helm,
+        [0x1719] = Layer.Helm, [0x171A] = Layer.Helm, [0x171B] = Layer.Helm, [0x171C] = Layer.Helm,
+
+        [0x1EFD] = Layer.Shirt, [0x1517] = Layer.Shirt, [0x2794] = Layer.InnerTorso,
+        [0x3175] = Layer.Shirt, [0x3176] = Layer.Shirt,
+        [0x1541] = Layer.MiddleTorso, [0x153D] = Layer.MiddleTorso, [0x1F7B] = Layer.MiddleTorso,
+        [0x1FFD] = Layer.MiddleTorso, [0x1FA1] = Layer.MiddleTorso, [0x2310] = Layer.MiddleTorso,
+        [0x1F9F] = Layer.MiddleTorso, [0x27A1] = Layer.MiddleTorso,
+        [0x230E] = Layer.OuterTorso, [0x1F00] = Layer.OuterTorso, [0x1F03] = Layer.OuterTorso,
+        [0x2687] = Layer.OuterTorso, [0x1F01] = Layer.OuterTorso, [0x2799] = Layer.OuterTorso,
+        [0x279C] = Layer.OuterTorso, [0x2782] = Layer.OuterTorso, [0x2783] = Layer.OuterTorso,
+        [0x2FB9] = Layer.OuterTorso, [0x2FBA] = Layer.OuterTorso,
+        [0x1515] = Layer.Cloak, [0x230A] = Layer.Cloak,
+        [0x153B] = Layer.Waist, [0x27A0] = Layer.Waist, [0x2B68] = Layer.Waist,
+
+        [0x152E] = Layer.Pants, [0x1539] = Layer.Pants, [0x279B] = Layer.Pants, [0x2FC3] = Layer.Pants,
+        [0x230C] = Layer.OuterLegs, [0x1516] = Layer.OuterLegs, [0x1537] = Layer.OuterLegs,
+        [0x279A] = Layer.OuterLegs,
+
+        [0x2307] = Layer.Shoes, [0x170B] = Layer.Shoes, [0x1711] = Layer.Shoes,
+        [0x170F] = Layer.Shoes, [0x170D] = Layer.Shoes, [0x2797] = Layer.Shoes,
+        [0x2796] = Layer.Shoes, [0x2FC4] = Layer.Shoes,
+    };
+
+    private static readonly Layer[] BrowserClothingSlots =
+    [
+        Layer.Helm, Layer.Shirt, Layer.InnerTorso, Layer.MiddleTorso, Layer.OuterTorso,
+        Layer.Cloak, Layer.Waist, Layer.Pants, Layer.OuterLegs, Layer.Shoes,
+    ];
+
+    private static void ApplyBrowserClothing(Mobile mobile, int[] itemIDs, int hueValue)
+    {
+        if (itemIDs?.Length != 4)
+        {
+            return;
+        }
+
+        foreach (var itemID in itemIDs)
+        {
+            if (itemID != 0 && !BrowserClothingLayers.ContainsKey(itemID))
+            {
+                return;
+            }
+        }
+
+        foreach (var layer in BrowserClothingSlots)
+        {
+            mobile.FindItemOnLayer(layer)?.Delete();
+        }
+
+        var hue = Utility.ClipDyedHue(hueValue & 0x3FFF);
+        foreach (var itemID in itemIDs)
+        {
+            if (itemID == 0)
+            {
+                continue;
+            }
+
+            EquipItem(mobile, new Item(itemID)
+            {
+                Hue = hue,
+                Layer = BrowserClothingLayers[itemID],
+                LootType = LootType.Newbied,
+            });
+        }
     }
 
     private static CityInfo GetStartLocation(CharacterCreatedEventArgs args)

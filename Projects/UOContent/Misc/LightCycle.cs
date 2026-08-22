@@ -83,6 +83,11 @@ namespace Server
              *  6:00 AM ->  9:59 PM : Day
              */
 
+            return ComputeLevelAt(hours, minutes);
+        }
+
+        internal static int ComputeLevelAt(int hours, int minutes)
+        {
             return hours switch
             {
                 < 4  => NightLevel,

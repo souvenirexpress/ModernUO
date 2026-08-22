@@ -17,7 +17,9 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
+using Server.Accounting;
 using Server.Engines.CharacterCreation;
+using Server.Items;
 using Server.Misc;
 using Server.Mobiles;
 
@@ -93,11 +95,15 @@ public static class IncomingAccountPackets
         int hairHuef = reader.ReadInt16();
         reader.ReadByte();
         int cityIndex = reader.ReadByte();
-        reader.Seek(8, SeekOrigin.Current);
-        /*
-        var charSlot = reader.ReadInt32();
-        var clientIP = reader.ReadInt32();
-        */
+        int[] browserClothing = [reader.ReadUInt16(), reader.ReadUInt16(), reader.ReadUInt16(), reader.ReadUInt16()];
+        if ((browserClothing[0] & 0x8000) == 0)
+        {
+            browserClothing = [];
+        }
+        else
+        {
+            browserClothing[0] &= 0x3FFF;
+        }
         int shirtHue = reader.ReadInt16();
         int pantsHue = reader.ReadInt16();
 
@@ -158,7 +164,8 @@ public static class IncomingAccountPackets
             hairValf,
             hairHuef,
             prof,
-            race
+            race,
+            browserClothing
         );
 
         state.SendClientVersionRequest();
@@ -250,6 +257,12 @@ public static class IncomingAccountPackets
             return;
         }
 
+        if (a is Account account && AccountAdminBridge.IsCharacterBlocked(account, m))
+        {
+            state.Disconnect("Character access blocked by an administrator.");
+            return;
+        }
+
         m.NetState?.Disconnect("Character selected for a player already logged in.");
 
         state.SendClientVersionRequest();
@@ -300,7 +313,7 @@ public static class IncomingAccountPackets
         state.SendMobileIncoming(m, m);
 
         state.SendLoginComplete();
-        state.SendCurrentTime();
+        state.SendCurrentTime(Clock.WorldTime);
         state.SendSeasonChange((byte)m.GetSeason(), true);
         state.SendMapChange(m.Map);
 

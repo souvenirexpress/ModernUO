@@ -7,7 +7,7 @@ public class CharacterCreatedEventArgs(
     NetState state, IAccount a, string name, bool female,
     int hue, byte[] stats, CityInfo city, (SkillName, byte)[] skills,
     int shirtHue, int pantsHue, int hairId, int hairHue,
-    int beardId, int beardHue, int profession, Race race
+    int beardId, int beardHue, int profession, Race race, int[] browserClothing
 )
 {
     public NetState State { get; } = state;
@@ -43,4 +43,6 @@ public class CharacterCreatedEventArgs(
     public int Profession { get; set; } = profession;
 
     public Race Race { get; } = race;
+
+    public int[] BrowserClothing { get; } = browserClothing;
 }

@@ -1,0 +1,50 @@
+[
+  { "id": "smith", "sets": {
+    "everyday": [ { "itemId": 5399, "layer": "Shirt", "hue": 2425, "name": "wool shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2301, "name": "work trousers" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "leather boots" } ],
+    "work": [ { "itemId": 5399, "layer": "Shirt", "hue": 2406, "name": "soot-dark shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2301, "name": "work trousers" }, { "itemId": 5437, "layer": "MiddleTorso", "hue": 1810, "name": "smith apron" }, { "itemId": 5091, "layer": "OneHanded", "hue": 0, "name": "smith hammer" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "heavy boots" } ],
+    "sleep": [ { "itemId": 5399, "layer": "Shirt", "hue": 2101, "name": "linen sleep shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2101, "name": "linen drawers" } ],
+    "formal": [ { "itemId": 8065, "layer": "MiddleTorso", "hue": 1645, "name": "best doublet" }, { "itemId": 5433, "layer": "Pants", "hue": 2301, "name": "dark trousers" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "polished boots" } ]
+  } },
+  { "id": "baker", "sets": {
+    "everyday": [ { "itemId": 5399, "layer": "Shirt", "hue": 2101, "name": "cream shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2224, "name": "brown trousers" }, { "itemId": 5903, "layer": "Shoes", "hue": 1109, "name": "shoes" } ],
+    "work": [ { "itemId": 5399, "layer": "Shirt", "hue": 2101, "name": "rolled-sleeve shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2224, "name": "flour-dusted trousers" }, { "itemId": 5437, "layer": "MiddleTorso", "hue": 2101, "name": "baker apron" }, { "itemId": 5903, "layer": "Shoes", "hue": 1109, "name": "shoes" } ],
+    "sleep": [ { "itemId": 5399, "layer": "Shirt", "hue": 2101, "name": "sleep shirt" } ],
+    "formal": [ { "itemId": 7936, "layer": "OuterTorso", "hue": 1153, "name": "blue robe" }, { "itemId": 5903, "layer": "Shoes", "hue": 1109, "name": "good shoes" } ]
+  } },
+  { "id": "tailor", "sets": {
+    "everyday": [ { "itemId": 7931, "layer": "MiddleTorso", "hue": 1153, "name": "fitted doublet" }, { "itemId": 5398, "layer": "OuterLegs", "hue": 1645, "name": "wool skirt" }, { "itemId": 5903, "layer": "Shoes", "hue": 1109, "name": "soft shoes" } ],
+    "work": [ { "itemId": 5399, "layer": "Shirt", "hue": 1153, "name": "blue work shirt" }, { "itemId": 5398, "layer": "OuterLegs", "hue": 1645, "name": "practical skirt" }, { "itemId": 5435, "layer": "Waist", "hue": 2101, "name": "needle apron" }, { "itemId": 3999, "layer": "OneHanded", "hue": 0, "name": "tailor shears" }, { "itemId": 5903, "layer": "Shoes", "hue": 1109, "name": "soft shoes" } ],
+    "sleep": [ { "itemId": 5399, "layer": "Shirt", "hue": 2101, "name": "linen shift" } ],
+    "formal": [ { "itemId": 7931, "layer": "MiddleTorso", "hue": 1359, "name": "embroidered doublet" }, { "itemId": 5398, "layer": "OuterLegs", "hue": 1153, "name": "festival skirt" }, { "itemId": 5397, "layer": "Cloak", "hue": 1645, "name": "fine cloak" }, { "itemId": 5903, "layer": "Shoes", "hue": 1109, "name": "fine shoes" } ]
+  } },
+  { "id": "merchant", "sets": {
+    "everyday": [ { "itemId": 7931, "layer": "MiddleTorso", "hue": 2213, "name": "merchant doublet" }, { "itemId": 5433, "layer": "Pants", "hue": 1153, "name": "blue trousers" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "polished boots" }, { "itemId": 5397, "layer": "Cloak", "hue": 2213, "name": "travel cloak" } ],
+    "work": [ { "itemId": 7931, "layer": "MiddleTorso", "hue": 2213, "name": "merchant doublet" }, { "itemId": 5433, "layer": "Pants", "hue": 1153, "name": "blue trousers" }, { "itemId": 4031, "layer": "OneHanded", "hue": 0, "name": "ledger" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "polished boots" } ],
+    "sleep": [ { "itemId": 5399, "layer": "Shirt", "hue": 2101, "name": "linen nightshirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2101, "name": "linen drawers" } ],
+    "formal": [ { "itemId": 7936, "layer": "OuterTorso", "hue": 2213, "name": "fine merchant robe" }, { "itemId": 5397, "layer": "Cloak", "hue": 1153, "name": "ceremonial cloak" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "polished boots" } ]
+  } },
+  { "id": "healer", "sets": {
+    "everyday": [ { "itemId": 7936, "layer": "OuterTorso", "hue": 2125, "name": "green robe" }, { "itemId": 5901, "layer": "Shoes", "hue": 2213, "name": "sandals" } ],
+    "work": [ { "itemId": 7936, "layer": "OuterTorso", "hue": 2125, "name": "herbalist robe" }, { "itemId": 5435, "layer": "Waist", "hue": 2101, "name": "herb apron" }, { "itemId": 5901, "layer": "Shoes", "hue": 2213, "name": "sandals" } ],
+    "sleep": [ { "itemId": 5399, "layer": "Shirt", "hue": 2101, "name": "sleep shift" } ],
+    "formal": [ { "itemId": 7936, "layer": "OuterTorso", "hue": 1153, "name": "healer ceremonial robe" }, { "itemId": 5397, "layer": "Cloak", "hue": 2125, "name": "green cloak" }, { "itemId": 5901, "layer": "Shoes", "hue": 2213, "name": "sandals" } ]
+  } },
+  { "id": "inn", "sets": {
+    "everyday": [ { "itemId": 5399, "layer": "Shirt", "hue": 2213, "name": "wool shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2301, "name": "plain trousers" }, { "itemId": 5903, "layer": "Shoes", "hue": 1109, "name": "shoes" } ],
+    "work": [ { "itemId": 5399, "layer": "Shirt", "hue": 2213, "name": "tavern shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2301, "name": "plain trousers" }, { "itemId": 5437, "layer": "MiddleTorso", "hue": 1645, "name": "service apron" }, { "itemId": 5903, "layer": "Shoes", "hue": 1109, "name": "shoes" } ],
+    "sleep": [ { "itemId": 5399, "layer": "Shirt", "hue": 2101, "name": "sleep shirt" } ],
+    "formal": [ { "itemId": 7931, "layer": "MiddleTorso", "hue": 1645, "name": "festival doublet" }, { "itemId": 5397, "layer": "Cloak", "hue": 2213, "name": "best cloak" }, { "itemId": 5903, "layer": "Shoes", "hue": 1109, "name": "good shoes" } ]
+  } },
+  { "id": "laborer", "sets": {
+    "everyday": [ { "itemId": 5399, "layer": "Shirt", "hue": 2301, "name": "patched shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2224, "name": "patched trousers" }, { "itemId": 5903, "layer": "Shoes", "hue": 1109, "name": "worn shoes" } ],
+    "work": [ { "itemId": 5399, "layer": "Shirt", "hue": 2301, "name": "work shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2224, "name": "work trousers" }, { "itemId": 3897, "layer": "TwoHanded", "hue": 0, "name": "work shovel" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "work boots" } ],
+    "sleep": [ { "itemId": 5399, "layer": "Shirt", "hue": 2301, "name": "old nightshirt" } ],
+    "formal": [ { "itemId": 5399, "layer": "Shirt", "hue": 1153, "name": "clean shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2301, "name": "good trousers" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "boots" } ]
+  } },
+  { "id": "guard", "sets": {
+    "everyday": [ { "itemId": 7931, "layer": "MiddleTorso", "hue": 1153, "name": "off-duty doublet" }, { "itemId": 5433, "layer": "Pants", "hue": 2301, "name": "dark trousers" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "guard boots" } ],
+    "work": [ { "itemId": 5055, "layer": "InnerTorso", "hue": 0, "name": "Britain guard mail" }, { "itemId": 5399, "layer": "Shirt", "hue": 1153, "name": "blue guard shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2301, "name": "guard trousers" }, { "itemId": 5049, "layer": "OneHanded", "hue": 0, "name": "guard sword" }, { "itemId": 7026, "layer": "TwoHanded", "hue": 1153, "name": "Britain shield" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "guard boots" } ],
+    "sleep": [ { "itemId": 5399, "layer": "Shirt", "hue": 2101, "name": "barracks shirt" }, { "itemId": 5433, "layer": "Pants", "hue": 2101, "name": "linen drawers" } ],
+    "formal": [ { "itemId": 5055, "layer": "InnerTorso", "hue": 0, "name": "polished guard mail" }, { "itemId": 5397, "layer": "Cloak", "hue": 1153, "name": "Britain officer cloak" }, { "itemId": 5049, "layer": "OneHanded", "hue": 0, "name": "guard sword" }, { "itemId": 5899, "layer": "Shoes", "hue": 1109, "name": "polished guard boots" } ]
+  } }
+]

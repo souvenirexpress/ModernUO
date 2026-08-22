@@ -22,7 +22,8 @@ public partial class Clock : Item
     public const double SecondsPerUOMinute = 5.0;
     public const double MinutesPerUODay = SecondsPerUOMinute * 24;
 
-    private static readonly DateTime WorldStart = new(1997, 9, 1);
+    private static readonly DateTime WorldStart = new(1997, 9, 1, 0, 0, 0, DateTimeKind.Utc);
+    private static readonly TimeZoneInfo WorldTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Europe/Berlin");
 
     [Constructible]
     public Clock(int itemID = 0x104B) : base(itemID)
@@ -32,6 +33,7 @@ public partial class Clock : Item
     public override double DefaultWeight => 3.0;
 
     public static DateTime ServerStart { get; private set; }
+    public static DateTime WorldTime => ToWorldTime(Core.Now);
 
     public static void Configure()
     {
@@ -57,21 +59,18 @@ public partial class Clock : Item
 
     public static void GetTime(Map map, int x, int y, out int hours, out int minutes, out int totalMinutes)
     {
-        var timeSpan = Core.Now - WorldStart;
-
-        totalMinutes = (int)(timeSpan.TotalSeconds / SecondsPerUOMinute);
-
-        if (map != null)
-        {
-            totalMinutes += map.MapIndex * 320;
-        }
-
-        // Really on OSI this must be by subserver
-        totalMinutes += x / 16;
-
-        hours = totalMinutes / 60 % 24;
-        minutes = totalMinutes % 60;
+        var utcNow = Core.Now;
+        var worldTime = ToWorldTime(utcNow);
+        totalMinutes = (int)(utcNow - WorldStart).TotalMinutes;
+        hours = worldTime.Hour;
+        minutes = worldTime.Minute;
     }
+
+    internal static DateTime ToWorldTime(DateTime utcTime) =>
+        TimeZoneInfo.ConvertTimeFromUtc(
+            utcTime.Kind == DateTimeKind.Utc ? utcTime : DateTime.SpecifyKind(utcTime, DateTimeKind.Utc),
+            WorldTimeZone
+        );
 
     public static void GetTime(out int generalNumber, out string exactTime)
     {

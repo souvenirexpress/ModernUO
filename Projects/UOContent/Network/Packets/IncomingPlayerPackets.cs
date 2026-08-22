@@ -16,6 +16,7 @@
 using System.Buffers;
 using CommunityToolkit.HighPerformance;
 using Server.Engines.Help;
+using Server.Engines.MobileCombat;
 using Server.Engines.MLQuests;
 using Server.Engines.Virtues;
 using Server.Guilds;
@@ -77,7 +78,7 @@ public static class IncomingPlayerPackets
 
         var m = World.FindMobile((Serial)reader.ReadUInt32());
 
-        if (m != null)
+        if (m != null && MobileCombatSystem.AllowAttackRequest(from, m))
         {
             from.Attack(m);
         }

@@ -317,6 +317,11 @@ public static class AccountHandler
             logger.Information("Login: {NetState} Banned account '{Username}'", e.State, un);
             e.RejectReason = ALRReason.Blocked;
         }
+        else if (!AccountAdminBridge.HasServerAccess(acct))
+        {
+            logger.Information("Login: {NetState} Server access disabled for '{Username}'", e.State, un);
+            e.RejectReason = ALRReason.Blocked;
+        }
         else
         {
             logger.Information("Login: {NetState} Valid credentials for '{Username}'", e.State, un);
@@ -351,6 +356,11 @@ public static class AccountHandler
         else if (acct.Banned)
         {
             logger.Information("Login: {NetState} Banned account '{Username}'", e.State, un);
+            e.Accepted = false;
+        }
+        else if (!AccountAdminBridge.HasServerAccess(acct))
+        {
+            logger.Information("Login: {NetState} Server access disabled for '{Username}'", e.State, un);
             e.Accepted = false;
         }
         else

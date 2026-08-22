@@ -2718,7 +2718,9 @@ namespace Server.Mobiles
                 }
             }
 
-            base.Damage((int)(amount * damageBonus), from, informMount);
+            var adjustedDamage = (int)(amount * damageBonus);
+            adjustedDamage = Engines.MobileCombat.MobileCombatSystem.ApplyDefense(this, from, adjustedDamage);
+            base.Damage(adjustedDamage, from, informMount);
 
             // If the blood oath caster will die then damage is not reflected back to the attacker
             if (hasBloodOath && Alive && !Deleted && !IsDeadBondedPet)
