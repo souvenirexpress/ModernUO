@@ -27,7 +27,7 @@ public interface ISlayer
     SlayerName Slayer2 { get; set; }
 }
 
-[SerializationGenerator(10, false)]
+[SerializationGenerator(11, false)]
 public abstract partial class BaseWeapon
     : Item, IWeapon, IFactionItem, ICraftable, ISlayer, IDurability, IAosItem, IIdentifiable
 {
@@ -141,53 +141,45 @@ public abstract partial class BaseWeapon
     [SerializableFieldDefault(25)]
     private AosWeaponAttributes WeaponAttributesDefaultValue() => new(this);
 
-    [SerializableField(26)]
-    [SerializedCommandProperty(AccessLevel.GameMaster)]
-    private bool _playerConstructed;
-
-    [SerializableFieldSaveFlag(26)]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private bool ShouldSerializePlayerConstructed() => _playerConstructed;
-
     [SerializedIgnoreDupe]
-    [SerializableField(27, setter: "private")]
+    [SerializableField(26, setter: "private")]
     [SerializedCommandProperty(AccessLevel.GameMaster, canModify: true)]
     private AosSkillBonuses _skillBonuses;
 
-    [SerializableFieldSaveFlag(27)]
+    [SerializableFieldSaveFlag(26)]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private bool ShouldSerializeSkillBonuses() => !_skillBonuses.IsEmpty;
 
-    [SerializableFieldDefault(27)]
+    [SerializableFieldDefault(26)]
     private AosSkillBonuses SkillBonusesDefaultValue() => new(this);
 
     [InvalidateProperties]
-    [SerializableField(28)]
+    [SerializableField(27)]
     [SerializedCommandProperty(AccessLevel.GameMaster)]
     private SlayerName _slayer2;
 
-    [SerializableFieldSaveFlag(28)]
+    [SerializableFieldSaveFlag(27)]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private bool ShouldSerializeSlayer2() => _slayer2 != SlayerName.None;
 
     [SerializedIgnoreDupe]
-    [SerializableField(29, setter: "private")]
+    [SerializableField(28, setter: "private")]
     [SerializedCommandProperty(AccessLevel.GameMaster, canModify: true)]
     private AosElementAttributes _aosElementDamages;
 
-    [SerializableFieldSaveFlag(29)]
+    [SerializableFieldSaveFlag(28)]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private bool ShouldSerializeElementAttributes() => !_aosElementDamages.IsEmpty;
 
-    [SerializableFieldDefault(29)]
+    [SerializableFieldDefault(28)]
     private AosElementAttributes AosElementAttributesDefaultValue() => new(this);
 
     [InvalidateProperties]
-    [SerializableField(30)]
+    [SerializableField(29)]
     [SerializedCommandProperty(AccessLevel.GameMaster)]
     private string _engravedText;
 
-    [SerializableFieldSaveFlag(30)]
+    [SerializableFieldSaveFlag(29)]
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private bool ShouldSerializeEngravedText() => !string.IsNullOrEmpty(_engravedText);
 
@@ -674,7 +666,6 @@ public abstract partial class BaseWeapon
             Crafter = from.RawName;
         }
 
-        PlayerConstructed = true;
         Identified = true;
 
         var resourceType = typeRes ?? craftItem.Resources[0].ItemType;
@@ -3580,236 +3571,6 @@ public abstract partial class BaseWeapon
         }
     }
 
-    private static bool GetSaveFlag(OldSaveFlag flags, OldSaveFlag toGet) => (flags & toGet) != 0;
-
-    private void Deserialize(IGenericReader reader, int version)
-    {
-        var flags = (OldSaveFlag)reader.ReadInt();
-
-        if (GetSaveFlag(flags, OldSaveFlag.DamageLevel))
-        {
-            _damageLevel = (WeaponDamageLevel)reader.ReadInt();
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.AccuracyLevel))
-        {
-            _accuracyLevel = (WeaponAccuracyLevel)reader.ReadInt();
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.DurabilityLevel))
-        {
-            _durabilityLevel = (WeaponDurabilityLevel)reader.ReadInt();
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Quality))
-        {
-            _quality = (WeaponQuality)reader.ReadInt();
-        }
-        else
-        {
-            _quality = WeaponQuality.Regular;
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Hits))
-        {
-            _hitPoints = reader.ReadInt();
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.MaxHits))
-        {
-            _maxHitPoints = reader.ReadInt();
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Slayer))
-        {
-            _slayer = (SlayerName)reader.ReadInt();
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Poison))
-        {
-            _poison = reader.ReadPoison();
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.PoisonCharges))
-        {
-            _poisonCharges = reader.ReadInt();
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Crafter))
-        {
-            Timer.DelayCall(crafter => _crafter = crafter?.RawName, reader.ReadEntity<Mobile>());
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Identified))
-        {
-            _identified = version >= 6 || reader.ReadBool();
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.StrReq))
-        {
-            _strRequirement = reader.ReadInt();
-        }
-        else
-        {
-            _strRequirement = -1;
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.DexReq))
-        {
-            _dexRequirement = reader.ReadInt();
-        }
-        else
-        {
-            _dexRequirement = -1;
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.IntReq))
-        {
-            _intRequirement = reader.ReadInt();
-        }
-        else
-        {
-            _intRequirement = -1;
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.MinDamage))
-        {
-            _minDamage = reader.ReadInt();
-        }
-        else
-        {
-            _minDamage = -1;
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.MaxDamage))
-        {
-            _maxDamage = reader.ReadInt();
-        }
-        else
-        {
-            _maxDamage = -1;
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.HitSound))
-        {
-            _hitSound = reader.ReadInt();
-        }
-        else
-        {
-            _hitSound = -1;
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.MissSound))
-        {
-            _missSound = reader.ReadInt();
-        }
-        else
-        {
-            _missSound = -1;
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Speed))
-        {
-            if (version < 9)
-            {
-                _speed = reader.ReadInt();
-            }
-            else
-            {
-                _speed = reader.ReadFloat();
-            }
-        }
-        else
-        {
-            _speed = -1;
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.MaxRange))
-        {
-            _maxRange = reader.ReadInt();
-        }
-        else
-        {
-            _maxRange = -1;
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Skill))
-        {
-            _skill = (SkillName)reader.ReadInt();
-        }
-        else
-        {
-            _skill = (SkillName)(-1);
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Type))
-        {
-            _type = (WeaponType)reader.ReadInt();
-        }
-        else
-        {
-            _type = (WeaponType)(-1);
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Animation))
-        {
-            _animation = (WeaponAnimation)reader.ReadInt();
-        }
-        else
-        {
-            _animation = (WeaponAnimation)(-1);
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Resource))
-        {
-            _resource = (CraftResource)reader.ReadInt();
-        }
-        else
-        {
-            _resource = CraftResource.Iron;
-        }
-
-        Attributes = new AosAttributes(this);
-
-        if (GetSaveFlag(flags, OldSaveFlag.Attributes))
-        {
-            Attributes.Deserialize(reader);
-        }
-
-        WeaponAttributes = new AosWeaponAttributes(this);
-
-        if (GetSaveFlag(flags, OldSaveFlag.WeaponAttributes))
-        {
-            WeaponAttributes.Deserialize(reader);
-        }
-
-        PlayerConstructed = GetSaveFlag(flags, OldSaveFlag.PlayerConstructed);
-
-        SkillBonuses = new AosSkillBonuses(this);
-
-        if (GetSaveFlag(flags, OldSaveFlag.SkillBonuses))
-        {
-            SkillBonuses.Deserialize(reader);
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.Slayer2))
-        {
-            _slayer2 = (SlayerName)reader.ReadInt();
-        }
-
-        AosElementDamages = new AosElementAttributes(this);
-
-        if (GetSaveFlag(flags, OldSaveFlag.ElementalDamages))
-        {
-            AosElementDamages.Deserialize(reader);
-        }
-
-        if (GetSaveFlag(flags, OldSaveFlag.EngravedText))
-        {
-            _engravedText = reader.ReadString();
-        }
-    }
-
     [AfterDeserialization]
     private void AfterDeserialization()
     {
@@ -3875,42 +3636,6 @@ public abstract partial class BaseWeapon
         }
     }
 
-    [Flags]
-    private enum OldSaveFlag
-    {
-        None = 0x00000000,
-        DamageLevel = 0x00000001,
-        AccuracyLevel = 0x00000002,
-        DurabilityLevel = 0x00000004,
-        Quality = 0x00000008,
-        Hits = 0x00000010,
-        MaxHits = 0x00000020,
-        Slayer = 0x00000040,
-        Poison = 0x00000080,
-        PoisonCharges = 0x00000100,
-        Crafter = 0x00000200,
-        Identified = 0x00000400,
-        StrReq = 0x00000800,
-        DexReq = 0x00001000,
-        IntReq = 0x00002000,
-        MinDamage = 0x00004000,
-        MaxDamage = 0x00008000,
-        HitSound = 0x00010000,
-        MissSound = 0x00020000,
-        Speed = 0x00040000,
-        MaxRange = 0x00080000,
-        Skill = 0x00100000,
-        Type = 0x00200000,
-        Animation = 0x00400000,
-        Resource = 0x00800000,
-        Attributes = 0x01000000,
-        WeaponAttributes = 0x02000000,
-        PlayerConstructed = 0x04000000,
-        SkillBonuses = 0x08000000,
-        Slayer2 = 0x10000000,
-        ElementalDamages = 0x20000000,
-        EngravedText = 0x40000000
-    }
 }
 
 public enum CheckSlayerResult

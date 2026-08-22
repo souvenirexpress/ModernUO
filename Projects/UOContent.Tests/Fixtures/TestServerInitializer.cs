@@ -100,6 +100,8 @@ internal static class TestServerInitializer
             }
 
             World.Configure();
+            // Registers the Accounts entity persistence; without it no test can construct an Account.
+            Server.Accounting.Accounts.Configure();
             RaceDefinitions.Configure();
             MovementImpl.Configure();
             PathFollower.Configure();

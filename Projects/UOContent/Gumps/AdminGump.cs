@@ -5,6 +5,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Server.Accounting;
+using Server.Accounting.Security;
 using Server.Collections;
 using Server.Commands;
 using Server.Maps;
@@ -226,9 +227,12 @@ namespace Server.Gumps
                     }
                 case AdminGumpPage.Information_Perf:
                     {
-                        AddLabel(20, 130, LabelHue, "Cycles Per Second:");
-                        AddLabel(40, 150, LabelHue, $"Current: {Core.CyclesPerSecond:N2}");
-                        AddLabel(40, 170, LabelHue, $"Average: {Core.AverageCPS:N2}");
+                        var loopStatus = Core.IdleSleepUnsupported ? "Spinning - host cannot honor short waits" :
+                            Core.EventLoopIdleWaitMs == 0 ? "Spinning (configured)" :
+                            Core.IdleSleepSuspended ? "Sleep suspended - host returning waits late" : "Healthy";
+
+                        AddLabel(20, 130, LabelHue, "Event Loop:");
+                        AddLabel(40, 150, LabelHue, loopStatus);
 
                         using var sb = ValueStringBuilder.Create();
 
@@ -2903,7 +2907,7 @@ namespace Server.Gumps
                                     else
                                     {
                                         notice = "The password has been changed.";
-                                        a.SetPassword(password);
+                                        PasswordWorker.SetPassword(a, password, null);
                                         page = AdminGumpPage.AccountDetails_Information;
                                         CommandLogging.WriteLine(
                                             from,

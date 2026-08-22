@@ -22,7 +22,7 @@ namespace Server.Items
         int MaxArcaneCharges { get; set; }
     }
 
-    [SerializationGenerator(7, false)]
+    [SerializationGenerator(8, false)]
     public abstract partial class BaseClothing
         : Item, IDyable, IScissorable, IFactionItem, ICraftable, IWearableDurability, IAosItem
     {
@@ -82,30 +82,23 @@ namespace Server.Items
         [SerializableFieldSaveFlag(5)]
         private bool ShouldSerializeMaxHitPoints() => _maxHitPoints != 0;
 
+        [InvalidateProperties]
         [SerializableField(7)]
         [SerializedCommandProperty(AccessLevel.GameMaster)]
-        private bool _playerConstructed;
+        private string _crafter;
 
         [SerializableFieldSaveFlag(7)]
-        private bool ShouldSerializePlayerConstructed() => _playerConstructed;
+        private bool ShouldSerializeCrafter() => !string.IsNullOrEmpty(_crafter);
 
         [InvalidateProperties]
         [SerializableField(8)]
         [SerializedCommandProperty(AccessLevel.GameMaster)]
-        private string _crafter;
-
-        [SerializableFieldSaveFlag(8)]
-        private bool ShouldSerializeCrafter() => !string.IsNullOrEmpty(_crafter);
-
-        [InvalidateProperties]
-        [SerializableField(9)]
-        [SerializedCommandProperty(AccessLevel.GameMaster)]
         private ClothingQuality _quality = ClothingQuality.Regular;
 
-        [SerializableFieldSaveFlag(9)]
+        [SerializableFieldSaveFlag(8)]
         private bool ShouldSerializeQuality() => _quality != ClothingQuality.Regular;
 
-        // Field 10
+        // Field 9
         private int _strReq = -1;
 
         private FactionItem _factionState;
@@ -139,7 +132,7 @@ namespace Server.Items
             }
         }
 
-        [SerializableProperty(10, useField: nameof(_strReq))]
+        [SerializableProperty(9, useField: nameof(_strReq))]
         [CommandProperty(AccessLevel.GameMaster)]
         public int StrRequirement
         {
@@ -152,7 +145,7 @@ namespace Server.Items
             }
         }
 
-        [SerializableFieldSaveFlag(10)]
+        [SerializableFieldSaveFlag(9)]
         private bool ShouldSerializeStrReq() => _strReq != -1;
 
         public virtual CraftResource DefaultResource => CraftResource.None;
@@ -206,8 +199,6 @@ namespace Server.Items
             {
                 Hue = resHue;
             }
-
-            PlayerConstructed = true;
 
             var context = craftSystem.GetContext(from);
 
@@ -889,8 +880,6 @@ namespace Server.Items
             InvalidateProperties();
         }
 
-        private static bool GetSaveFlag(OldSaveFlag flags, OldSaveFlag toGet) => (flags & toGet) != 0;
-
         [AfterDeserialization]
         private void AfterDeserialization()
         {
@@ -911,21 +900,5 @@ namespace Server.Items
             }
         }
 
-        [Flags]
-        private enum OldSaveFlag
-        {
-            None = 0x00000000,
-            Resource = 0x00000001,
-            Attributes = 0x00000002,
-            ClothingAttributes = 0x00000004,
-            SkillBonuses = 0x00000008,
-            Resistances = 0x00000010,
-            MaxHitPoints = 0x00000020,
-            HitPoints = 0x00000040,
-            PlayerConstructed = 0x00000080,
-            Crafter = 0x00000100,
-            Quality = 0x00000200,
-            StrReq = 0x00000400
-        }
     }
 }

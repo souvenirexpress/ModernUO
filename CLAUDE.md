@@ -19,7 +19,7 @@ Apply these when writing or reviewing `.cs` files under `Projects/`.
 7. **`STArrayPool<T>.Shared`** not `ArrayPool<T>.Shared` — single-threaded optimized, no locks
 8. **`PooledRefList<T>`** not `new List<T>()` on hot paths — zero GC pressure, stack-allocated ref struct
 9. **Serialization** — class must be `partial`, constructor needs `[Constructible]`, `TimerExecutionToken` must NOT have `[SerializableField]`. New classes: use `[SerializationGenerator(version)]` (omit `encoded`). When bumping versions, add `MigrateFrom(VXContent)` (X = previous version). Never modify `Deserialize(reader, version)` for version bumps — that method is only for pre-codegen legacy saves. When migrating from pre-codegen Serialize/Deserialize: pass `false` if old code used `reader.ReadInt()`, bump version +1, and keep old logic as `private void Deserialize(IGenericReader reader, int version)` → `dev-docs/runuo-migration-docs/02-serialization.md`
-10. **No `Task.Run`/`new Thread()` for game logic** (tandem with rule #3) — game logic is the single-threaded event loop. Backgrounding is allowed only for work that does not itself touch game state (external service calls, large-file parse). When such work must *feed* game logic: run the heavy/I/O part off-loop and `ConfigureAwait(false)` its awaits so a continuation never resumes on the loop and silently foregrounds heavy work; then hand the result back **explicitly** — publish an immutable snapshot swapped via a `volatile` reference (the loop reads it lock-free), or marshal the apply step with `Core.LoopContext.Post(() => …)`. Never touch game state off-thread; never let the scheduler decide where the heavy work runs → `dev-docs/threading-model.md`
+10. **No `Task.Run`/`new Thread()` for game logic** (tandem with rule #3) — game logic is the single-threaded event loop. Backgrounding is allowed only for work that does not itself touch game state (external service calls, large-file parse). **Prove the need before adding a thread**: measure **on-loop** time, not wall-clock (frozen world is the cost, player latency is not), and gate on `Environment.ProcessorCount` — off-loading creates no CPU and buys nothing on 1–2 cores. New workers go in the vetted table in `dev-docs/threading-model.md` with their measurement. When such work must *feed* game logic: run the heavy/I/O part off-loop and `ConfigureAwait(false)` its awaits so a continuation never resumes on the loop and silently foregrounds heavy work; then hand the result back **explicitly** — publish an immutable snapshot swapped via a `volatile` reference (the loop reads it lock-free), or marshal the apply step with `Core.LoopContext.Post(() => …)`, re-validating in the continuation whatever may have changed while it ran. Never touch game state off-thread; never let the scheduler decide where the heavy work runs → `dev-docs/threading-model.md`
 11. **Never assume era** — if code uses `Core.AOS`/`Core.SE`/etc., ask which expansion to target
 12. **Naming** — `_camelCase` private fields, `PascalCase` properties/methods/classes; don't flag legacy `m_` but use `_` for new code
 13. **No empty gumps** — every gump must produce visual elements. An empty gump leaks on client+server (no way to close it). Use static `DisplayTo()` to validate before constructing → `dev-docs/gump-system.md`
@@ -29,6 +29,7 @@ Apply these when writing or reviewing `.cs` files under `Projects/`.
 17. **No `System.Text.StringBuilder`** — use `ValueStringBuilder` with `stackalloc` (bounded output) or `ValueStringBuilder.Create()` (unbounded). Supports `$"..."` interpolation directly. Always use `using var` for disposal. Use `Reset()` instead of reassigning → `dev-docs/string-handling.md`
 18. **Interpolation anti-patterns on handler-aware APIs** — `Send*`/`Say`/`Emote`/`PublicOverhead*`/`IPropertyList.Add`/gump `AddLabel`/`AddHtml`/`Html.Center`/`SpanWriter.Write*` all have `ref RawInterpolatedStringHandler` overloads that allocate zero strings, but only when the call-site argument is a `$"..."` literal directly. Avoid: ternaries with interpolated branches (`Send(c ? $"a" : $"b")`), switch expressions with interpolated arms, pre-built `var s = $"..."` locals (single-use), `.ToString()` / `.String()` / `string.Format` inside holes, string concat (`{a + b}`), LINQ string ops in holes. Use `:L` format spec for lowercase (`{rank:L}` not `rank.ToString().ToLowerInvariant()`) → `dev-docs/string-handling.md` § Interpolation Anti-Patterns
 19. **No `InvalidateProperties()` from inside `GetProperties`** — every property a `GetProperties` override reads must be a pure read. `InvalidateProperties()` rebuilds the list in place (`Reset()` + rebuild), and `Reset()` returns the pooled interpolation buffer — which the compiler rents for the whole `$"..."` expression, so every hole is evaluated while it is live — and rewinds the packet cursor. A getter that invalidates therefore throws `ArgumentNullException` (parameter `"array"`) out of `GetProperties` from an unrelated-looking line, or silently corrupts the tooltip. The engine refuses and logs an error; `DEBUG` throws. Lazy recomputation in a getter is fine — the *notification* is not. Invalidate in the setter that changes the value, or defer with `Timer.DelayCall(InvalidateProperties)` → `dev-docs/property-lists.md` § Never Invalidate From Inside `GetProperties`
+20. **Tick-count math must be wraparound-safe** — compare `Core.TickCount`/`GetTimestamp()` values only by subtraction (`a - b < 0`, never `a < b`), no zero/sign sentinels on tick fields, seed deadline fields from a real tick (never rely on the 0 default). Cloud hypervisors (GCP) pass through the host's never-resetting counter: ticks start enormous and can wrap negative. Linux affected in production; Windows not so far → `dev-docs/tick-counts.md`
 
 ## Dev-Docs Reference
 
@@ -45,7 +46,11 @@ Apply these when writing or reviewing `.cs` files under `Projects/`.
 | Commands & targeting | `dev-docs/commands-targeting.md` |
 | Event system | `dev-docs/events.md` |
 | Threading model | `dev-docs/threading-model.md` |
+| Server hardware requirements | `dev-docs/server-requirements.md` |
+| Debugging event-loop performance (profiling build, decomposition, GC/RAM) | `dev-docs/debugging-event-loop.md` |
+| Tick-count overflow rules (subtraction comparisons; GCP pass-through counters) | `dev-docs/tick-counts.md` |
 | Server lifecycle & bootstrap phases (Configure/ConfigurePrompts/Initialize) | `dev-docs/server-lifecycle.md` |
+| Platform prerequisites (ICU, tzdata, native libs per distro) | `dev-docs/platform-prerequisites.md` |
 | Configuration system | `dev-docs/configuration.md` |
 | Networking & packets | `dev-docs/networking-packets.md` |
 | IP bans, blocklists & allowlists (incl. unblocking a player) | `dev-docs/ip-bans-and-allowlists.md` |
@@ -94,7 +99,18 @@ Then copy only the relevant skill files based on the task:
 | Migrate persistence (WorldSave) | `migrate-from-runuo/migrate-persistence` |
 | Migrate multi-file system | `migrate-from-runuo/migrate-systems` |
 
-To enable a skill: `cp dev-docs/claude-skills/<name>.md .claude/skills/`
+To enable a skill — Claude Code loads `.claude/skills/<name>/SKILL.md`; a bare `.md` dropped
+directly into `.claude/skills/` is **not** picked up, and newly installed skills appear in the
+*next* session:
+
+```sh
+# Standard skills (modernuo-*)
+mkdir -p .claude/skills/<name> && cp dev-docs/claude-skills/<name>.md .claude/skills/<name>/SKILL.md
+
+# Migration skills — sources live in the migrate-from-runuo/ subfolder, but install under the
+# bare skill name (the table's "migrate-from-runuo/<name>" is the source path, not the name):
+mkdir -p .claude/skills/<name> && cp dev-docs/claude-skills/migrate-from-runuo/<name>.md .claude/skills/<name>/SKILL.md
+```
 
 Migration skills reference the deep docs in `dev-docs/runuo-migration-docs/` and point to existing ModernUO skills for best practices.
 

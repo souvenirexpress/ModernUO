@@ -5248,6 +5248,7 @@ public partial class Mobile : IHued, IComparable<Mobile>, ISpawnable, IObjectPro
         item.Name = oldItem.Name;
         item.Weight = oldItem.Weight;
 
+        item.PlayerConstructed = oldItem.PlayerConstructed;
         item.Amount = oldAmount - amount;
         item.Map = oldItem.Map;
 
@@ -7833,6 +7834,12 @@ public partial class Mobile : IHued, IComparable<Mobile>, ISpawnable, IObjectPro
             m_DeltaQueue.Enqueue(this);
         }
     }
+
+    /// <summary>
+    /// True when deltas remain queued after a <see cref="ProcessDeltaQueue"/> pass, which is
+    /// bounded by the count it saw on entry. The event loop consults this before sleeping.
+    /// </summary>
+    public static bool HasQueuedDeltas => m_DeltaQueue.Count > 0;
 
     public static void ProcessDeltaQueue()
     {

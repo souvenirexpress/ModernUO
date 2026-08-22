@@ -30,6 +30,7 @@ public class BlocklistConfigurationTests
     {
         var original = new BlocklistSettings
         {
+            Enabled = true,
             File = "D:/shared/ip-blocklist.txt",
             ReloadInterval = TimeSpan.FromMinutes(5),
             ReportHits = false,
@@ -39,6 +40,7 @@ public class BlocklistConfigurationTests
 
         var json = JsonConfig.Serialize(original);
 
+        Assert.Contains("\"enabled\"", json);
         Assert.Contains("\"file\"", json);
         Assert.Contains("\"reloadInterval\"", json);
         Assert.Contains("\"reportHits\"", json);
@@ -48,11 +50,19 @@ public class BlocklistConfigurationTests
         var restored = JsonSerializer.Deserialize<BlocklistSettings>(json, JsonConfig.DefaultOptions);
 
         Assert.NotNull(restored);
+        Assert.Equal(original.Enabled, restored.Enabled);
         Assert.Equal(original.File, restored.File);
         Assert.Equal(original.ReloadInterval, restored.ReloadInterval);
         Assert.Equal(original.ReportHits, restored.ReportHits);
         Assert.Equal(original.BanDuration, restored.BanDuration);
         Assert.Equal(original.PromoteSuppression, restored.PromoteSuppression);
+    }
+
+    // The point of the flag: a shard that never opts in must not start the reload poll.
+    [Fact]
+    public void Blocklist_is_off_by_default()
+    {
+        Assert.False(new BlocklistSettings().Enabled);
     }
 
     // The generator (tools/Export-IpBlocklist.ps1) writes to this path by default; if one side moves
