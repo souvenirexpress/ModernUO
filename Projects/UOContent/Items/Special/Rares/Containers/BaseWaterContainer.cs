@@ -1,5 +1,7 @@
-﻿using System;
+using System;
 using ModernUO.Serialization;
+using Server.Engines.WorldSimulation;
+using Server.Targeting;
 
 namespace Server.Items;
 
@@ -53,10 +55,42 @@ public abstract partial class BaseWaterContainer : Container, IHasQuantity
 
     public override void OnDoubleClick(Mobile from)
     {
+        if (!from.InRange(GetWorldLocation(), 2))
+        {
+            from.SendLocalizedMessage(500446); // That is too far away.
+            return;
+        }
+
         if (IsEmpty)
         {
             base.OnDoubleClick(from);
+            return;
         }
+
+        from.BeginTarget(2, true, TargetFlags.None, PourOnTarget);
+        from.SendMessage("What do you want to pour the water on?");
+    }
+
+    private void PourOnTarget(Mobile from, object target)
+    {
+        var result = InteractionResolver.Resolve(
+            new InteractionContext
+            {
+                Actor = from,
+                Source = this,
+                Target = target,
+                Action = WorldInteractionAction.Extinguish,
+                Environment = new EnvironmentContext()
+            }
+        );
+
+        if (result.Success)
+        {
+            Quantity--;
+            from.PlaySound(0x4E);
+        }
+
+        WorldSimulationMessaging.Send(from, result);
     }
 
     public override void OnSingleClick(Mobile from)
