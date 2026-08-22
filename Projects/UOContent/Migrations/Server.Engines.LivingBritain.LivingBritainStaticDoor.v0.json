@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "type": "Server.Engines.LivingBritain.LivingBritainStaticDoor",
+  "properties": [
+    {
+      "name": "OverrideId",
+      "type": "string",
+      "rule": "PrimitiveTypeMigrationRule",
+      "ruleArguments": [
+        ""
+      ]
+    },
+    {
+      "name": "DoorClosedId",
+      "type": "int",
+      "rule": "PrimitiveTypeMigrationRule",
+      "ruleArguments": [
+        ""
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "version": 0,
+  "type": "Server.Engines.LivingBritain.LivingBritainStaticContainer",
+  "properties": [
+    {
+      "name": "OverrideId",
+      "type": "string",
+      "rule": "PrimitiveTypeMigrationRule",
+      "ruleArguments": [
+        ""
+      ]
+    }
+  ]
+}

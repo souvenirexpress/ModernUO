@@ -1,0 +1,22 @@
+{
+  "version": 0,
+  "type": "Server.Engines.LivingBritain.LivingBritainSpinningWheel",
+  "properties": [
+    {
+      "name": "OverrideId",
+      "type": "string",
+      "rule": "PrimitiveTypeMigrationRule",
+      "ruleArguments": [
+        ""
+      ]
+    },
+    {
+      "name": "BaseItemId",
+      "type": "int",
+      "rule": "PrimitiveTypeMigrationRule",
+      "ruleArguments": [
+        ""
+      ]
+    }
+  ]
+}

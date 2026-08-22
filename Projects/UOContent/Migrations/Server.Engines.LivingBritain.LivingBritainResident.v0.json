@@ -1,0 +1,72 @@
+{
+  "version": 0,
+  "type": "Server.Engines.LivingBritain.LivingBritainResident",
+  "properties": [
+    {
+      "name": "ProfileId",
+      "type": "string",
+      "rule": "PrimitiveTypeMigrationRule",
+      "ruleArguments": [
+        ""
+      ]
+    },
+    {
+      "name": "Reputation",
+      "type": "System.Collections.Generic.Dictionary\u003CServer.Mobile, int\u003E",
+      "rule": "DictionaryMigrationRule",
+      "ruleArguments": [
+        "Server.Mobile",
+        "SerializableInterfaceMigrationRule",
+        "0",
+        "int",
+        "PrimitiveTypeMigrationRule",
+        "1",
+        ""
+      ]
+    },
+    {
+      "name": "Visits",
+      "type": "System.Collections.Generic.Dictionary\u003CServer.Mobile, int\u003E",
+      "rule": "DictionaryMigrationRule",
+      "ruleArguments": [
+        "Server.Mobile",
+        "SerializableInterfaceMigrationRule",
+        "0",
+        "int",
+        "PrimitiveTypeMigrationRule",
+        "1",
+        ""
+      ]
+    },
+    {
+      "name": "QuestStates",
+      "type": "System.Collections.Generic.Dictionary\u003CServer.Mobile, int\u003E",
+      "rule": "DictionaryMigrationRule",
+      "ruleArguments": [
+        "Server.Mobile",
+        "SerializableInterfaceMigrationRule",
+        "0",
+        "int",
+        "PrimitiveTypeMigrationRule",
+        "1",
+        ""
+      ]
+    },
+    {
+      "name": "CurrentActivity",
+      "type": "string",
+      "rule": "PrimitiveTypeMigrationRule",
+      "ruleArguments": [
+        ""
+      ]
+    },
+    {
+      "name": "CurrentOutfit",
+      "type": "string",
+      "rule": "PrimitiveTypeMigrationRule",
+      "ruleArguments": [
+        ""
+      ]
+    }
+  ]
+}
