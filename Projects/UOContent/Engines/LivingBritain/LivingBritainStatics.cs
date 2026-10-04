@@ -149,7 +149,7 @@ public partial class LivingBritainStaticItem : Item, ILivingBritainStatic
         ItemID = definition.ItemId;
         Hue = definition.Hue;
         Name = string.IsNullOrWhiteSpace(definition.Name) ? null : definition.Name;
-        Movable = false;
+        LivingBritainStaticSemantics.ApplyEquipment(this, definition);
     }
 
     public override void OnDoubleClick(Mobile from)
@@ -165,8 +165,7 @@ public partial class LivingBritainStaticItem : Item, ILivingBritainStatic
             return;
         }
 
-        from.Animate(32, 5, 1, true, false, 0);
-        from.SendMessage(0x3B2, "Ihr setzt Euch hin.");
+        Server.Engines.Seating.ChairSeating.TrySit(from, this);
     }
 }
 
@@ -246,8 +245,7 @@ public partial class LivingBritainFunctionalItem : Item, ILivingBritainStatic
         switch (_functionType)
         {
             case "seat":
-                from.Animate(32, 5, 1, true, false, 0);
-                from.SendMessage(0x3B2, "Ihr setzt Euch hin.");
+                Server.Engines.Seating.ChairSeating.TrySit(from, this);
                 return;
             case "light":
                 _active = !_active;
@@ -360,6 +358,14 @@ public enum LivingBritainStaticKind
 
 public static class LivingBritainStaticSemantics
 {
+    public static void ApplyEquipment(Item item, BritainStaticOverride definition)
+    {
+        item.Movable = definition.Movable || definition.Equippable;
+        item.Layer = definition.Equippable && definition.EquipLayer is >= (int)Layer.FirstValid and <= (int)Layer.LastUserValid
+            ? (Layer)definition.EquipLayer
+            : Layer.Invalid;
+    }
+
     public static ILivingBritainStatic Create(BritainStaticOverride definition)
     {
         var kind = Classify(definition);

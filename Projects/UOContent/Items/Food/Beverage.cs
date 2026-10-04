@@ -600,14 +600,14 @@ public abstract partial class BaseBeverage : Item, IHasQuantity
                     Actor = from,
                     Source = this,
                     Target = targ,
-                    Action = WorldInteractionAction.Extinguish,
+                    Action = targ is IWorldSimulatedObject { State.IsBurning: true }
+                        ? WorldInteractionAction.Extinguish : WorldInteractionAction.Cool,
                     Environment = new EnvironmentContext()
                 }
             );
 
             if (result.Success)
             {
-                Quantity--;
                 from.PlaySound(0x4E);
             }
 

@@ -8,8 +8,8 @@ using Server.Targeting;
 
 namespace Server.Engines.LivingBritain;
 
-[SerializationGenerator(0)]
-public partial class LivingBritainWorldSimulationItem : WorldSimulationItem, ILivingBritainStatic, IWorldInteractionSource, IWorldVisualProfile
+[SerializationGenerator(1)]
+public partial class LivingBritainWorldSimulationItem : WorldSimulationItem, ILivingBritainStatic, IWorldInteractionSource, IWorldVisualProfile, IWorldVisualHueProfile
 {
     [SerializableField(0)]
     private string _overrideId;
@@ -62,6 +62,18 @@ public partial class LivingBritainWorldSimulationItem : WorldSimulationItem, ILi
     [SerializableField(16)]
     private int _ashItemId;
 
+    [SerializableField(17)]
+    private int _defaultHue;
+
+    [SerializableField(18)]
+    private int _burningHue;
+
+    [SerializableField(19)]
+    private int _charredHue;
+
+    [SerializableField(20)]
+    private int _ashHue;
+
     [Constructible]
     public LivingBritainWorldSimulationItem() : base(0x1, MaterialId.Unknown)
     {
@@ -103,10 +115,10 @@ public partial class LivingBritainWorldSimulationItem : WorldSimulationItem, ILi
         _definitionFingerprint = fingerprint;
         SetPrimaryMaterial(material);
         ApplyCapabilities(simulation.Capabilities);
-        ApplyVisuals(definition.ItemId, simulation.Visuals);
+        ApplyVisuals(definition.ItemId, definition.Hue, simulation.Visuals);
         Hue = definition.Hue;
         Name = string.IsNullOrWhiteSpace(definition.Name) ? null : definition.Name;
-        Movable = definition.Movable;
+        LivingBritainStaticSemantics.ApplyEquipment(this, definition);
 
         if (resetState)
         {
@@ -120,13 +132,25 @@ public partial class LivingBritainWorldSimulationItem : WorldSimulationItem, ILi
 
     public override void OnDoubleClick(Mobile from)
     {
+        if (Server.Engines.Seating.ChairSeating.Facing(ItemID, from.Direction) >= 0)
+        {
+            if (State.IsBurning || State.IsHot || State.Condition <= 0)
+            {
+                from.SendMessage("Dieser Sitzplatz ist nicht benutzbar.");
+                return;
+            }
+
+            Server.Engines.Seating.ChairSeating.TrySit(from, this);
+            return;
+        }
+
         if (!from.InRange(GetWorldLocation(), 2))
         {
             from.SendLocalizedMessage(500446);
             return;
         }
 
-        if (_heatPower <= 0 && _ignitePower <= 0 && _coolPower <= 0 && _extinguishPower <= 0)
+        if (_heatPower <= 0 && _ignitePower <= 0 && _coolPower <= 0 && _extinguishPower <= 0 && _cutPower <= 0 && _chopPower <= 0)
         {
             from.SendMessage(0x3B2, $"Material: {PrimaryMaterial}, Zustand: {State.Condition:P0}, Feuchte: {State.Moisture:P0}.");
             return;
@@ -143,6 +167,8 @@ public partial class LivingBritainWorldSimulationItem : WorldSimulationItem, ILi
             : actions.Contains(WorldInteractionAction.Ignite) ? WorldInteractionAction.Ignite
             : actions.Contains(WorldInteractionAction.Heat) ? WorldInteractionAction.Heat
             : actions.Contains(WorldInteractionAction.Cool) ? WorldInteractionAction.Cool
+            : actions.Contains(WorldInteractionAction.Chop) ? WorldInteractionAction.Chop
+            : actions.Contains(WorldInteractionAction.Cut) ? WorldInteractionAction.Cut
             : (WorldInteractionAction?)null;
         if (action == null)
         {
@@ -177,13 +203,17 @@ public partial class LivingBritainWorldSimulationItem : WorldSimulationItem, ILi
         _lightPower = capabilities.LightPower;
     }
 
-    private void ApplyVisuals(int fallbackItemId, BritainWorldSimulationVisuals visuals)
+    private void ApplyVisuals(int fallbackItemId, int fallbackHue, BritainWorldSimulationVisuals visuals)
     {
         visuals ??= new BritainWorldSimulationVisuals();
         _defaultItemId = visuals.DefaultItemId > 0 ? visuals.DefaultItemId : fallbackItemId;
         _burningItemId = visuals.BurningItemId > 0 ? visuals.BurningItemId : _defaultItemId;
         _charredItemId = visuals.CharredItemId > 0 ? visuals.CharredItemId : _defaultItemId;
         _ashItemId = visuals.AshItemId > 0 ? visuals.AshItemId : _charredItemId;
+        DefaultHue = visuals.DefaultHue is { } defaultHue ? Math.Clamp(defaultHue, 0, 3000) : fallbackHue;
+        BurningHue = visuals.BurningHue is { } burningHue ? Math.Clamp(burningHue, 0, 3000) : fallbackHue;
+        CharredHue = visuals.CharredHue is { } charredHue ? Math.Clamp(charredHue, 0, 3000) : fallbackHue;
+        AshHue = visuals.AshHue is { } ashHue ? Math.Clamp(ashHue, 0, 3000) : fallbackHue;
     }
 
     private static WorldObjectState ToState(BritainWorldSimulationState state)

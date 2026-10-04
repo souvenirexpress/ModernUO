@@ -11,53 +11,14 @@ public static class AffordanceResolver
         EnvironmentContext environment
     )
     {
-        var actions = new List<WorldInteractionAction> { WorldInteractionAction.Inspect };
-
-        if (target is not IWorldSimulatedObject simulatedTarget)
+        var actions = new List<WorldInteractionAction>();
+        foreach (var action in InteractionResolver.SupportedActions)
         {
-            return actions;
-        }
-
-        var capabilities = SourceCapabilityResolver.GetCapabilities(source);
-        var material = MaterialRegistry.Get(simulatedTarget.PrimaryMaterial);
-        var state = simulatedTarget.State;
-
-        if (capabilities.HeatPower > 0.0)
-        {
-            actions.Add(WorldInteractionAction.Heat);
-        }
-
-        if (capabilities.IgnitePower >= WorldSimulationThresholds.MinimumIgnitePower &&
-            material.Flammability >= WorldSimulationThresholds.MinimumFlammability &&
-            state.Moisture < WorldSimulationThresholds.MaximumIgnitableMoisture &&
-            state.FuelRemaining > 0.0)
-        {
-            actions.Add(WorldInteractionAction.Ignite);
-        }
-
-        if (capabilities.CoolPower > 0.0)
-        {
-            actions.Add(WorldInteractionAction.Cool);
-        }
-
-        if (capabilities.ExtinguishPower > 0.0 && state.IsBurning)
-        {
-            actions.Add(WorldInteractionAction.Extinguish);
-        }
-
-        if (capabilities.ChopPower > 0.0 && material.CutResistance is not null)
-        {
-            actions.Add(WorldInteractionAction.Chop);
-        }
-
-        if (capabilities.CutPower > 0.0 && material.CutResistance is not null)
-        {
-            actions.Add(WorldInteractionAction.Cut);
-        }
-
-        if (simulatedTarget.Item.Movable)
-        {
-            actions.Add(WorldInteractionAction.Carry);
+            if (InteractionResolver.Explain(new InteractionContext
+                { Actor = actor, Source = source, Target = target, Action = action, Environment = environment }).Allowed)
+            {
+                actions.Add(action);
+            }
         }
 
         return actions;

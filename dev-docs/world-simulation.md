@@ -107,6 +107,17 @@ The generated `[Props` fields on `WorldSimulationItem` also expose persisted sta
 
 ## Current Scope
 
+Abadoria v0.10.36 adds Cut/Chop rules with material resistance, tool condition,
+sharpness, wear and persistent target condition/cracking. Affordances delegate
+to the same rule explanations used by execution; prepared vocabulary-only
+actions are no longer offered. Client context menus query server-owned offers
+through BF/0081; execution revalidates access and has a 750 ms actor cooldown.
+Studio exposes six executable source capabilities. Mechanical remains retain
+their serial; no recipes/resource yields or object splitting are implemented.
+See the parent repository's `Documentation/WORLD-INTERACTIONS.md` for details.
+
 Version 1 implements the framework, all requested material categories, dynamic state, optional container-state contracts, affordance and interaction resolvers, central active ticking, visual-state separation, Fire/Water interactions, example items, GM diagnostics, and automated coverage.
 
-It does not yet provide mechanical damage rules, liquid mixing, construction physics, food processing, magic storage, weather discovery from maps/regions, or mass conversion of the existing item library.
+Remaining work includes liquid mixing, construction physics, food processing,
+magic storage, weather discovery from maps/regions, and mass conversion of the
+existing item library. Cut/Chop damage is implemented as described above.

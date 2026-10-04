@@ -102,7 +102,7 @@ public static class IncomingAccountPackets
         var flags = reader.ReadInt32();
         reader.Seek(8, SeekOrigin.Current);
         int prof = reader.ReadByte();
-        reader.Seek(15, SeekOrigin.Current);
+        var browserClothingHues = BrowserCreationAppearance.ReadHues(ref reader);
 
         var genderRace = reader.ReadByte();
 
@@ -130,6 +130,7 @@ public static class IncomingAccountPackets
         if ((browserClothing[0] & 0x8000) == 0)
         {
             browserClothing = [];
+            browserClothingHues = null;
         }
         else
         {
@@ -196,7 +197,8 @@ public static class IncomingAccountPackets
             hairHuef,
             prof,
             race,
-            browserClothing
+            browserClothing,
+            browserClothingHues
         );
 
         state.SendClientVersionRequest();

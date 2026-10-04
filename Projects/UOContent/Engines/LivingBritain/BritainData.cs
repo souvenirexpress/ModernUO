@@ -305,6 +305,9 @@ public sealed record BritainStaticOverride
     public string FunctionType { get; init; }
     public bool Locked { get; init; }
     public bool Movable { get; init; }
+    public bool Equippable { get; init; }
+    public int AnimationId { get; init; }
+    public int EquipLayer { get; init; }
     public BritainWorldSimulationDefinition Simulation { get; init; }
     public Point3D ToPoint3D() => new(X, Y, Z);
 }
@@ -360,6 +363,10 @@ public sealed record BritainWorldSimulationVisuals
     public int BurningItemId { get; init; }
     public int CharredItemId { get; init; }
     public int AshItemId { get; init; }
+    public int? DefaultHue { get; init; }
+    public int? BurningHue { get; init; }
+    public int? CharredHue { get; init; }
+    public int? AshHue { get; init; }
 }
 
 public sealed record BritainTerrainOverride

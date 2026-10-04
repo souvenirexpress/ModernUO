@@ -40,7 +40,8 @@ public static partial class IncomingExtendedCommandPackets
 
     public static unsafe void Configure()
     {
-        IncomingPackets.Register(0xBF, 0, true, &ExtendedCommand);
+        // Each extended command enforces its own login restrictions; portrait queries also run at character selection.
+        IncomingPackets.Register(0xBF, 0, false, &ExtendedCommand);
 
         RegisterExtended(0x05, false, &ScreenSize);
         RegisterExtended(0x06, true, &PartyMessage);
@@ -59,6 +60,7 @@ public static partial class IncomingExtendedCommandPackets
         RegisterExtended(0x2E, true, &TargetedSkillUse);
         RegisterExtended(0x30, true, &TargetByResourceMacro);
         RegisterExtended(0x32, true, &ToggleFlying);
+        RegisterExtended(0x7F, false, true, &CharacterPortraitRequest);
     }
 
     private static void UnhandledBF(NetState state, SpanReader reader)

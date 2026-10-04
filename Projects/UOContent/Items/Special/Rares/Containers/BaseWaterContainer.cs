@@ -79,14 +79,14 @@ public abstract partial class BaseWaterContainer : Container, IHasQuantity
                 Actor = from,
                 Source = this,
                 Target = target,
-                Action = WorldInteractionAction.Extinguish,
+                Action = target is IWorldSimulatedObject { State.IsBurning: true }
+                    ? WorldInteractionAction.Extinguish : WorldInteractionAction.Cool,
                 Environment = new EnvironmentContext()
             }
         );
 
         if (result.Success)
         {
-            Quantity--;
             from.PlaySound(0x4E);
         }
 

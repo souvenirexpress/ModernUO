@@ -286,7 +286,7 @@ public static partial class CharacterCreation
             newChar.FacialHairHue = appearanceRace.ClipHairHue(args.BeardHue & 0x3FFF);
         }
 
-        ApplyBrowserClothing(newChar, args.BrowserClothing, args.ShirtHue);
+        ApplyBrowserClothing(newChar, args.BrowserClothing, args.ShirtHue, args.BrowserClothingHues);
 
         var city = GetStartLocation(args);
         newChar.MoveToWorld(city.Location, city.Map);
@@ -339,7 +339,7 @@ public static partial class CharacterCreation
         Layer.Cloak, Layer.Waist, Layer.Pants, Layer.OuterLegs, Layer.Shoes,
     ];
 
-    private static void ApplyBrowserClothing(Mobile mobile, int[] itemIDs, int hueValue)
+    public static void ApplyBrowserClothing(Mobile mobile, int[] itemIDs, int hueValue, int[] hues = null)
     {
         if (itemIDs?.Length != 4)
         {
@@ -360,8 +360,9 @@ public static partial class CharacterCreation
         }
 
         var hue = Utility.ClipDyedHue(hueValue & 0x3FFF);
-        foreach (var itemID in itemIDs)
+        for (var index = 0; index < itemIDs.Length; index++)
         {
+            var itemID = itemIDs[index];
             if (itemID == 0)
             {
                 continue;
@@ -369,7 +370,7 @@ public static partial class CharacterCreation
 
             EquipItem(mobile, new Item(itemID)
             {
-                Hue = hue,
+                Hue = hues?.Length == 4 && BrowserCreationAppearance.IsSupportedHue(hues[index]) ? hues[index] : hue,
                 Layer = BrowserClothingLayers[itemID],
                 LootType = LootType.Newbied,
             });

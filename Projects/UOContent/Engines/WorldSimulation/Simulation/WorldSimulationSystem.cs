@@ -126,10 +126,10 @@ public static class WorldSimulationSystem
 
             Advance(item, TimeSpan.FromSeconds(1.0), environment);
 
-            if (!NeedsUpdates(item, environment))
+            // Advance may already unregister the item via OnSimulationStateChanged.
+            if (!NeedsUpdates(item, environment) && _activeSet.Remove(item))
             {
-                _activeSet.Remove(item);
-                _activeItems.RemoveAt(i);
+                _activeItems.Remove(item);
             }
         }
     }

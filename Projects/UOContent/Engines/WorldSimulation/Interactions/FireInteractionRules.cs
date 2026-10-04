@@ -1,4 +1,5 @@
 using System;
+using Server.Items;
 
 namespace Server.Engines.WorldSimulation;
 
@@ -10,7 +11,7 @@ public sealed class HeatInteractionRule : IInteractionRule
     public InteractionExplanation Explain(InteractionContext context)
     {
         var capabilities = SourceCapabilityResolver.GetCapabilities(context.Source);
-        return capabilities.HeatPower > 0.0
+        return double.IsFinite(capabilities.HeatPower) && capabilities.HeatPower > 0.0
             ? new InteractionExplanation(true, "The source can transfer heat to the target.")
             : new InteractionExplanation(false, "The source has no heat power.");
     }
@@ -45,7 +46,8 @@ public sealed class IgniteInteractionRule : IInteractionRule
         var material = MaterialRegistry.Get(target.PrimaryMaterial);
         var capabilities = SourceCapabilityResolver.GetCapabilities(context.Source);
 
-        if (capabilities.IgnitePower < WorldSimulationThresholds.MinimumIgnitePower)
+        if (!double.IsFinite(capabilities.IgnitePower) || !double.IsFinite(capabilities.HeatPower) ||
+            capabilities.IgnitePower < WorldSimulationThresholds.MinimumIgnitePower)
         {
             return new InteractionExplanation(
                 false,
@@ -74,6 +76,18 @@ public sealed class IgniteInteractionRule : IInteractionRule
         if (state.FuelRemaining <= 0.0)
         {
             return new InteractionExplanation(false, "Target has no fuel remaining.");
+        }
+
+        if (state.IsBurning || context.Environment.IsUnderWater)
+        {
+            return new InteractionExplanation(false, "The target is already burning or under water.");
+        }
+        var heatCapacity = Math.Max(0.1, material.HeatCapacity ?? 1.0);
+        var reached = state.Temperature + (capabilities.HeatPower * 100.0 + capabilities.IgnitePower * 400.0) /
+            heatCapacity * (1.0 - state.Moisture * 0.75);
+        if (reached < material.IgnitionTemperature)
+        {
+            return new InteractionExplanation(false, "Insufficient heat to ignite; heat the target first.");
         }
 
         return new InteractionExplanation(true, "Material, moisture, fuel, and source power permit ignition.");
@@ -128,9 +142,15 @@ public sealed class ExtinguishInteractionRule : IInteractionRule
     {
         var capabilities = SourceCapabilityResolver.GetCapabilities(context.Source);
 
-        if (capabilities.ExtinguishPower <= 0.0 && capabilities.CoolPower <= 0.0)
+        var power = context.Action == WorldInteractionAction.Cool ? capabilities.CoolPower : capabilities.ExtinguishPower;
+        if (!double.IsFinite(power) || power <= 0.0)
         {
             return new InteractionExplanation(false, "The source cannot cool or extinguish the target.");
+        }
+
+        if (context.Action == WorldInteractionAction.Extinguish && !((IWorldSimulatedObject)context.Target).State.IsBurning)
+        {
+            return new InteractionExplanation(false, "The target is not burning.");
         }
 
         return new InteractionExplanation(true, "The source can absorb heat and suppress combustion.");
@@ -141,7 +161,7 @@ public sealed class ExtinguishInteractionRule : IInteractionRule
         var target = (IWorldSimulatedObject)context.Target;
         var state = target.State;
         var capabilities = SourceCapabilityResolver.GetCapabilities(context.Source);
-        var power = Math.Clamp(Math.Max(capabilities.CoolPower, capabilities.ExtinguishPower), 0.0, 2.0);
+        var power = Math.Clamp(context.Action == WorldInteractionAction.Cool ? capabilities.CoolPower : capabilities.ExtinguishPower, 0.0, 2.0);
         var beforeTemperature = state.Temperature;
         var beforeMoisture = state.Moisture;
         var beforeCombustion = state.CombustionIntensity;
@@ -161,12 +181,21 @@ public sealed class ExtinguishInteractionRule : IInteractionRule
         {
             consumable.Consume(context.Action, power);
         }
+        else if (context.Source is BaseBeverage beverage)
+        {
+            beverage.Quantity--;
+        }
+        else if (context.Source is BaseWaterContainer water)
+        {
+            water.Quantity--;
+        }
 
         var result = new InteractionResult { Success = true };
         result.StateChanges.Add($"Temperature {beforeTemperature:F1} C -> {state.Temperature:F1} C");
         result.StateChanges.Add($"Moisture {beforeMoisture:F2} -> {state.Moisture:F2}");
         result.StateChanges.Add($"Combustion {beforeCombustion:F2} -> {state.CombustionIntensity:F2}");
-        result.Messages.Add(state.IsBurning ? "The flames weaken." : "The fire is extinguished.");
+        result.Messages.Add(context.Action == WorldInteractionAction.Cool ? "The target cools and becomes wetter."
+            : state.IsBurning ? "The flames weaken." : "The fire is extinguished.");
         return result;
     }
 }

@@ -269,6 +269,9 @@ public class BritainDataTests
             Id = "studio_oak_log",
             Name = "Eichenstamm",
             ItemId = 0x1BDD,
+            Equippable = true,
+            AnimationId = 615,
+            EquipLayer = (int)Layer.OneHanded,
             Simulation = new BritainWorldSimulationDefinition
             {
                 Enabled = true,
@@ -287,6 +290,8 @@ public class BritainDataTests
             Assert.Equal(0.8, item.Capabilities.IgnitePower);
             Assert.Equal(0.05, item.State.Moisture);
             Assert.Equal(0xDE3, item.BurningItemID);
+            Assert.True(item.Movable);
+            Assert.Equal(Layer.OneHanded, item.Layer);
 
             item.State.Moisture = 0.65;
             item.OnSimulationStateChanged();
@@ -298,6 +303,10 @@ public class BritainDataTests
                 Simulation = definition.Simulation with { State = definition.Simulation.State with { Moisture = 0.2 } }
             });
             Assert.Equal(0.2, item.State.Moisture);
+
+            item.Apply(definition with { Equippable = false, Movable = false });
+            Assert.False(item.Movable);
+            Assert.Equal(Layer.Invalid, item.Layer);
         }
         finally
         {

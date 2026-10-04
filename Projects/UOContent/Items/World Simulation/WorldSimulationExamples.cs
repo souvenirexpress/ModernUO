@@ -150,7 +150,8 @@ public partial class SimulationWater : WorldSimulationItem, IWorldInteractionSou
                 Actor = from,
                 Source = this,
                 Target = target,
-                Action = WorldInteractionAction.Extinguish,
+                Action = target is IWorldSimulatedObject { State.IsBurning: true }
+                    ? WorldInteractionAction.Extinguish : WorldInteractionAction.Cool,
                 Environment = new EnvironmentContext()
             }
         );

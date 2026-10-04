@@ -15,11 +15,26 @@ public static class InteractionResolver
     [
         new HeatInteractionRule(),
         new IgniteInteractionRule(),
-        new ExtinguishInteractionRule()
+        new ExtinguishInteractionRule(),
+        new MechanicalInteractionRule(),
+        new InspectInteractionRule()
     ];
+
+    public static readonly IReadOnlyList<WorldInteractionAction> SupportedActions = System.Array.AsReadOnly(new[]
+    {
+        WorldInteractionAction.Inspect, WorldInteractionAction.Cut, WorldInteractionAction.Chop,
+        WorldInteractionAction.Heat, WorldInteractionAction.Ignite,
+        WorldInteractionAction.Cool, WorldInteractionAction.Extinguish
+    });
 
     public static InteractionResult Resolve(InteractionContext context)
     {
+        var access = InteractionAccess.Explain(context);
+        if (!access.Allowed)
+        {
+            return InteractionResult.Failed(access.Reason);
+        }
+
         foreach (var rule in _rules)
         {
             if (!rule.CanHandle(context))
@@ -28,7 +43,19 @@ public static class InteractionResolver
             }
 
             var explanation = rule.Explain(context);
-            return explanation.Allowed ? rule.Resolve(context) : InteractionResult.Failed(explanation.Reason);
+            if (!explanation.Allowed)
+            {
+                return InteractionResult.Failed(explanation.Reason);
+            }
+            if (context.Actor != null && context.Action != WorldInteractionAction.Inspect)
+            {
+                if (!context.Actor.BeginAction(typeof(InteractionResolver)))
+                {
+                    return InteractionResult.Failed("Bitte wartet einen Moment.");
+                }
+                Timer.DelayCall(System.TimeSpan.FromMilliseconds(750), () => context.Actor.EndAction(typeof(InteractionResolver)));
+            }
+            return rule.Resolve(context);
         }
 
         return InteractionResult.Failed("No interaction rule can handle this action and target.");
@@ -36,6 +63,12 @@ public static class InteractionResolver
 
     public static InteractionExplanation Explain(InteractionContext context)
     {
+        var access = InteractionAccess.Explain(context);
+        if (!access.Allowed)
+        {
+            return access;
+        }
+
         foreach (var rule in _rules)
         {
             if (rule.CanHandle(context))

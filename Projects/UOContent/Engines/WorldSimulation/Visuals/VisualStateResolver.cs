@@ -23,6 +23,17 @@ public static class VisualStateResolver
             target.Item.ItemID = itemID;
         }
 
+        if (target is IWorldVisualHueProfile hueProfile)
+        {
+            target.Item.Hue = state.FuelRemaining <= 0.0
+                ? hueProfile.AshHue
+                : state.IsBurning
+                    ? hueProfile.BurningHue
+                    : state.IsCharred
+                        ? hueProfile.CharredHue
+                        : hueProfile.DefaultHue;
+        }
+
         target.Item.Light = state.IsBurning ? LightType.Circle300 : LightType.Empty;
     }
 }
