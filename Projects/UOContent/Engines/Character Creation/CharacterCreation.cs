@@ -124,6 +124,7 @@ public static partial class CharacterCreation
     private static CityInfo[] _availableStartingCities;
 
     public static CityInfo[] GetStartingCities() =>
+        ImageWorld.ImageWorldSystem.StartEnabled ? [ImageWorld.ImageWorldSystem.StartCity] :
         _availableStartingCities ??= ConstructAvailableStartingCities();
 
     private static CityInfo[] ConstructAvailableStartingCities()
@@ -379,6 +380,11 @@ public static partial class CharacterCreation
 
     private static CityInfo GetStartLocation(CharacterCreatedEventArgs args)
     {
+        if (ImageWorld.ImageWorldSystem.StartEnabled)
+        {
+            return ImageWorld.ImageWorldSystem.StartCity;
+        }
+
         var availableMaps = ExpansionInfo.CoreExpansion.MapSelectionFlags;
         var m = args.Mobile;
 

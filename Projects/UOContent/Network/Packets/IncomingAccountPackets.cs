@@ -312,6 +312,11 @@ public static class IncomingAccountPackets
 
     public static void DoLogin(this NetState state, Mobile m)
     {
+        if (m is PlayerMobile joiningPlayer)
+        {
+            Server.Engines.ImageWorld.ImageWorldSystem.PrepareLogin(joiningPlayer);
+        }
+
         state.SendLoginConfirmation(m);
 
         state.SendMapChange(m.Map);

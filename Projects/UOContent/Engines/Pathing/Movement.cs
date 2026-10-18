@@ -45,6 +45,11 @@ public class MovementImpl : IMovementImpl
             return false;
         }
 
+        if (map == Server.Engines.ImageWorld.ImageWorldSystem.SceneMap)
+        {
+            return Server.Engines.ImageWorld.ImageWorldSystem.CheckMovement(m, loc, d, out newZ);
+        }
+
         var xStart = loc.X;
         var yStart = loc.Y;
 
